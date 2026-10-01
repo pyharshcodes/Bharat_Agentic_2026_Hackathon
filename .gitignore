@@ -8,3 +8,6 @@ venv/
 output/*.pdf
 !output/.gitkeep
 .system_generated/
+
+*.mp3
+aikart-manifest-guide.pdf
