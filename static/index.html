@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jan-Sahayak AI (जन-सहायक) — Autonomous Civic & Welfare Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <!-- Sovereign Top Banner -->
+  <div class="tricolor-strip"></div>
+  
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="emblem-badge">🇮🇳</div>
+        <div>
+          <div class="brand-title">
+            <span class="hindi-highlight">जन-सहायक</span>
+            <span class="eng-highlight">Jan-Sahayak AI</span>
+          </div>
+          <p class="brand-subtitle">Autonomous Civic & Welfare Delivery Agent for Bharat • Powered by aiKart</p>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <span class="badge badge-accent">🏆 BharatAgentic 2026</span>
+        <span class="badge badge-success"><span class="dot-pulse"></span> Sandbox Ready</span>
+        <span class="badge badge-outline">Multi-Agent Swarm</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-container">
+    <!-- Top Hero Banner -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>Transforming 800M+ Citizens from <em>Welfare Seekers</em> to <em>Autonomous Entitled Beneficiaries</em>.</h1>
+        <p>Beyond chatbots: A deterministic multi-agent engine that audits 50+ government welfare schemes, calculates statutory eligibility, detects missing document gaps, mints official application dossiers, and drafts legally cited CPGRAMS appeals.</p>
+      </div>
+    </section>
+
+    <!-- Interactive Persona Selector Deck -->
+    <section class="persona-section">
+      <div class="section-title-wrap">
+        <h2>1. Select Citizen Persona <span class="sub-label">(1-Click Live Test for Hackathon Judges)</span></h2>
+        <span class="hint">Click any persona to auto-populate profile and trigger the multi-agent reasoning chain:</span>
+      </div>
+
+      <div class="persona-grid" id="personaGrid">
+        <div class="persona-card active" data-id="rameshwar_farmer">
+          <div class="persona-icon">🌾</div>
+          <div class="persona-info">
+            <div class="persona-name">Rameshwar Yadav</div>
+            <div class="persona-meta">Small Farmer • Gorakhpur, UP</div>
+            <div class="persona-tags">
+              <span class="tag">Income: ₹1.4L</span>
+              <span class="tag">1.2 Acres</span>
+              <span class="tag">2 Daughters</span>
+            </div>
+            <p class="persona-desc">Eligible for PM-Kisan, Ayushman Bharat, PMAY-G & Sukanya Samriddhi.</p>
+          </div>
+        </div>
+
+        <div class="persona-card" data-id="sunita_street_vendor">
+          <div class="persona-icon">🛒</div>
+          <div class="persona-info">
+            <div class="persona-name">Sunita Devi</div>
+            <div class="persona-meta">Street Vendor • Chandni Chowk, Delhi</div>
+            <div class="persona-tags">
+              <span class="tag">Income: ₹95K</span>
+              <span class="tag">Urban BPL</span>
+              <span class="tag">Daughter 5y</span>
+            </div>
+            <p class="persona-desc">Needs PM SVANidhi collateral-free credit & 25% RTE Free Private School Admission.</p>
+          </div>
+        </div>
+
+        <div class="persona-card" data-id="kamala_widow">
+          <div class="persona-icon">👵</div>
+          <div class="persona-info">
+            <div class="persona-name">Kamala Bai</div>
+            <div class="persona-meta">Elderly Widow • Jabalpur, MP</div>
+            <div class="persona-tags">
+              <span class="tag alert-tag">🚨 Pension Delayed 114 Days</span>
+              <span class="tag">BPL Kutcha House</span>
+            </div>
+            <p class="persona-desc">Triggers autonomous CPGRAMS administrative appeal citing Citizen Charter SLA.</p>
+          </div>
+        </div>
+
+        <div class="persona-card" data-id="rafiq_artisan">
+          <div class="persona-icon">🪵</div>
+          <div class="persona-info">
+            <div class="persona-name">Mohammad Rafiq</div>
+            <div class="persona-meta">Woodcarver Artisan • Saharanpur, UP</div>
+            <div class="persona-tags">
+              <span class="tag">Income: ₹1.2L</span>
+              <span class="tag">Traditional Trade</span>
+              <span class="tag">OBC</span>
+            </div>
+            <p class="persona-desc">Targets PM Vishwakarma ₹15,000 tool grant & 5% concessional credit.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custom Query Bar -->
+      <div class="custom-query-box">
+        <div class="custom-input-wrap">
+          <span class="input-icon">💬</span>
+          <input type="text" id="customQueryInput" placeholder="Or enter citizen description in Hindi/English (e.g. 'Main Lucknow me chai ki dukan chalata hoon, 1 lakh aamdani hai...')" />
+          <button id="voiceBtn" class="voice-btn" title="Speak in Hindi/English">🎙️</button>
+        </div>
+        <div class="action-btn-group">
+          <select id="langSelect" class="lang-select">
+            <option value="Hindi">Hindi (हिंदी)</option>
+            <option value="English">English</option>
+          </select>
+          <button id="launchBtn" class="launch-btn">
+            <span class="btn-text">Execute Multi-Agent Swarm</span>
+            <span class="btn-icon">⚡</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-time Agent Execution Visualizer -->
+    <section class="agent-trace-section" id="traceSection">
+      <div class="section-title-wrap">
+        <h2>2. Live Multi-Agent Cognitive Telemetry</h2>
+        <div class="trace-meta">
+          <span id="runtimeBadge" class="runtime-badge">Runtime: -- ms</span>
+          <span id="agentsCountBadge" class="runtime-badge badge-blue">5 Specialized Agents Active</span>
+        </div>
+      </div>
+
+      <div class="agent-pipeline" id="agentPipeline">
+        <div class="pipeline-step" id="step-1">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Profile & Doc Intelligence Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-2">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Bharat Schemes Reasoning Engine</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-3">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Document Gap & Compliance Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-4">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Autonomous Form & PDF Packager</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-5">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-title">Grievance & Legal Appeals Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Metrics Ribbon -->
+    <section class="metrics-ribbon" id="metricsRibbon">
+      <div class="metric-card">
+        <div class="metric-val text-green" id="metricSchemes">--</div>
+        <div class="metric-lbl">Qualified Welfare Schemes</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val text-saffron" id="metricBenefits">₹0</div>
+        <div class="metric-lbl">Direct Annual Financial Benefit</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val text-blue" id="metricReadiness">0%</div>
+        <div class="metric-lbl">Document Readiness Score</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-val text-purple" id="metricSpeed">-- ms</div>
+        <div class="metric-lbl">Sandbox Execution Speed</div>
+      </div>
+    </section>
+
+    <!-- Vernacular Audio & Summary Box -->
+    <section class="summary-section" id="summarySection">
+      <div class="summary-header">
+        <div class="summary-title-wrap">
+          <span class="summary-icon">🗣️</span>
+          <h3>Citizen Audio & Bilingual Entitlement Briefing</h3>
+        </div>
+        <div class="audio-controls">
+          <button id="speakBtn" class="speak-btn">🔊 Listen in Hindi / English</button>
+        </div>
+      </div>
+      <div class="summary-body" id="summaryText">
+        Agent will synthesize natural vernacular briefing once executed.
+      </div>
+    </section>
+
+    <!-- Results Section: Schemes, Documents, and Dossier Action -->
+    <section class="results-section" id="resultsSection">
+      <!-- Left Column: Qualified Schemes -->
+      <div class="results-left">
+        <div class="section-title-wrap">
+          <h2>3. Certified Welfare Entitlements</h2>
+          <span class="sub-label" id="schemesFoundLabel">Showing matching schemes</span>
+        </div>
+        <div class="schemes-list" id="schemesList">
+          <!-- Dynamic Scheme Cards injected here -->
+        </div>
+      </div>
+
+      <!-- Right Column: Document Audit & Actions -->
+      <div class="results-right">
+        <!-- Official PDF Action Card -->
+        <div class="dossier-card">
+          <div class="dossier-header">
+            <span class="dossier-icon">📑</span>
+            <div>
+              <h4>Official Application Dossier</h4>
+              <p>Cryptographically Certified PDF Form</p>
+            </div>
+          </div>
+          <p class="dossier-desc">Includes unified application fields, Aadhaar/demographic declarations, scheme checklists, and verified barcode seals.</p>
+          <button id="downloadPdfBtn" class="download-pdf-btn" disabled>
+            <span>📥 Download Application PDF</span>
+          </button>
+        </div>
+
+        <!-- Document Gap Audit -->
+        <div class="doc-audit-card">
+          <h4>📑 Document Compliance Audit</h4>
+          <div id="docAuditList" class="doc-audit-list">
+            <!-- Dynamic Document rows -->
+          </div>
+        </div>
+
+        <!-- Grievance Petition Card -->
+        <div class="grievance-card" id="grievanceCard" style="display: none;">
+          <div class="grievance-head">
+            <span class="alert-icon">⚖️</span>
+            <div>
+              <h4 id="grievanceTitle">Statutory CPGRAMS Appeal</h4>
+              <p id="grievanceSub">Citizen Charter Infraction Detected</p>
+            </div>
+          </div>
+          <div class="grievance-content" id="grievanceText"></div>
+          <div class="grievance-foot">
+            <button id="copyGrievanceBtn" class="copy-btn">📋 Copy Legal Petition</button>
+            <a href="https://pgportal.gov.in" target="_blank" class="portal-link">Open CPGRAMS Portal ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <div class="footer-container">
+      <div>
+        <strong>Jan-Sahayak AI (जन-सहायक)</strong> • BharatAgentic Hackathon 2026 Champion Contender
+      </div>
+      <div class="footer-links">
+        <a href="/docs" target="_blank">OpenAPI Docs</a>
+        <span>•</span>
+        <a href="https://aikart.co" target="_blank">aiKart Marketplace</a>
+        <span>•</span>
+        <span>Zero-Egress Deterministic Mode</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

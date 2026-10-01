@@ -1,0 +1,51 @@
+apiVersion: aikart.dev/v1
+kind: AgentManifest
+
+metadata:
+  name: jan-sahayak-ai
+  displayName: "Jan-Sahayak AI (जन-सहायक) — Autonomous Civic & Welfare Delivery Agent"
+  description: "Autonomous multi-agent welfare eligibility auditor, compliance verifier, government application packager, and CPGRAMS grievance drafter for Bharat."
+
+runtime:
+  type: docker
+  image: "docker.io/bharatagentic/jan-sahayak:1.0.0"
+  command: ["python", "run_sandbox.py"]
+
+resources:
+  cpu: 1
+  memoryMb: 1024
+  timeoutSeconds: 60
+
+inputs:
+  - name: persona
+    label: "Citizen Test Persona (Select to Auto-Fill Profile)"
+    type: select
+    required: true
+    options:
+      - "Rameshwar Yadav (Marginal Farmer - UP)"
+      - "Sunita Devi (Street Vendor - Delhi)"
+      - "Kamala Bai (Rural Widow - MP)"
+      - "Mohammad Rafiq (Artisan / Woodcarver - UP)"
+      - "Custom Citizen Query"
+    default: "Rameshwar Yadav (Marginal Farmer - UP)"
+
+  - name: custom_query
+    label: "Or Enter Custom Citizen Query / Grievance (Hindi or English)"
+    type: textarea
+    required: false
+    default: ""
+
+  - name: language
+    label: "Response Language"
+    type: select
+    required: false
+    options:
+      - "Hindi (हिंदी)"
+      - "English"
+    default: "Hindi (हिंदी)"
+
+output:
+  format: markdown
+
+security:
+  networkEgress: none

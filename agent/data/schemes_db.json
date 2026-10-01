@@ -1,0 +1,333 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-10-01",
+  "schemes": [
+    {
+      "id": "pm_kisan",
+      "name": "PM-Kisan Samman Nidhi",
+      "hindi_name": "प्रधानमंत्री किसान सम्मान निधि",
+      "category": "Agriculture",
+      "government": "Central",
+      "ministry": "Ministry of Agriculture and Farmers Welfare",
+      "summary": "Direct income support of ₹6,000 per year in three equal installments of ₹2,000 directly into bank accounts.",
+      "benefits": {
+        "financial": "₹6,000 / year (in 3 tranches of ₹2,000 via DBT)",
+        "type": "Direct Benefit Transfer (DBT)",
+        "frequency": "Every 4 months"
+      },
+      "eligibility": {
+        "occupation": ["Farmer", "Agriculturalist"],
+        "max_land_acres": 5.0,
+        "max_income": 300000,
+        "exclusions": ["Institutional landholders", "Income tax payers", "Constitutional post holders", "Serving/retired govt officers"]
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Bank Account details (Aadhaar linked NPCI seeded)",
+        "Land Ownership Records (Khasra/Khatauni/ROR)",
+        "Active Mobile Number"
+      ],
+      "nodal_portal": "https://pmkisan.gov.in",
+      "appeal_authority": "District Agriculture Officer / PM-Kisan State Nodal Officer"
+    },
+    {
+      "id": "ayushman_bharat",
+      "name": "Ayushman Bharat - PM-JAY",
+      "hindi_name": "आयुष्मान भारत - प्रधानमंत्री जन आरोग्य योजना",
+      "category": "Healthcare",
+      "government": "Central",
+      "ministry": "Ministry of Health and Family Welfare / NHA",
+      "summary": "Health insurance coverage up to ₹5,00,000 per family per year for secondary and tertiary care hospitalization.",
+      "benefits": {
+        "financial": "₹5,00,000 cashless cover per family / year",
+        "type": "Cashless Hospitalization",
+        "coverage": "Over 1,949 medical treatments across 27,000+ empanelled hospitals"
+      },
+      "eligibility": {
+        "occupation": ["Any"],
+        "economic_status": ["BPL", "SECC 2011 Deprivation Criteria", "Low Income", "Unorganized Worker"],
+        "max_income": 250000,
+        "family_criteria": "No cap on family size or age"
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Ration Card (NFSA or State BPL Card)",
+        "Income Certificate / PM-JAY Family ID verification"
+      ],
+      "nodal_portal": "https://beneficiary.nha.gov.in",
+      "appeal_authority": "District Medical Officer / State Health Agency (SHA)"
+    },
+    {
+      "id": "pm_svanidhi",
+      "name": "PM SVANidhi (Street Vendors Scheme)",
+      "hindi_name": "पीएम स्ट्रीट वेंडर्स आत्मनिर्भर निधि",
+      "category": "Financial Inclusion & Urban Livelihood",
+      "government": "Central",
+      "ministry": "Ministry of Housing and Urban Affairs",
+      "summary": "Affordable collateral-free working capital loan to street vendors starting at ₹10,000 up to ₹50,000 with 7% interest subsidy.",
+      "benefits": {
+        "financial": "Tranche 1: ₹10,000; Tranche 2: ₹20,000; Tranche 3: ₹50,000 loan + 7% interest subsidy + ₹1,200/yr digital cashback",
+        "type": "Collateral-free micro-credit loan & interest subsidy"
+      },
+      "eligibility": {
+        "occupation": ["Street Vendor", "Hawker", "Thelawala", "Urban Informal Seller", "Daily Earner"],
+        "urban_rural": ["Urban", "Semi-Urban", "Peri-Urban"],
+        "vending_proof": "Vending certificate or Letter of Recommendation (LoR) from ULB"
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Voter ID / Identity Proof",
+        "Urban Local Body (ULB) Vending Certificate or Town Vending Committee (TVC) ID",
+        "Bank Passbook (IFSC & Account No)"
+      ],
+      "nodal_portal": "https://pmsvanidhi.mohua.gov.in",
+      "appeal_authority": "Municipal Commissioner / Project Director DUDA"
+    },
+    {
+      "id": "pm_vishwakarma",
+      "name": "PM Vishwakarma Yojana",
+      "hindi_name": "पीएम विश्वकर्मा योजना (कारीगर एवं शिल्पकार)",
+      "category": "Artisans & Skill Development",
+      "government": "Central",
+      "ministry": "Ministry of Micro, Small and Medium Enterprises (MSME)",
+      "summary": "Holistic support to traditional artisans and craftspeople: recognized PM Vishwakarma Certificate, ₹15,000 toolkit grant, and 5% concessional credit up to ₹3 Lakhs.",
+      "benefits": {
+        "financial": "₹15,000 Toolkit Incentive + ₹1 Lakh (18 months) & ₹2 Lakhs (30 months) collateral-free loan at 5% interest",
+        "skill": "Basic 5-7 days training with ₹500/day stipend + Advanced training",
+        "identity": "Official PM Vishwakarma Digital Certificate and ID Card"
+      },
+      "eligibility": {
+        "occupation": ["Carpenter", "Blacksmith", "Potter", "Sculptor", "Cobbler", "Mason", "Basket Weaver", "Tailor", "Barber", "Washerman", "Doll & Toy Maker", "Artisan"],
+        "min_age": 18,
+        "tradition": "Engaged in one of 18 identified traditional family trades"
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Mobile Number linked with Aadhaar",
+        "Bank Account Details",
+        "Ration Card / Self-declaration of traditional trade"
+      ],
+      "nodal_portal": "https://pmvishwakarma.gov.in",
+      "appeal_authority": "District MSME Centre (DIC) General Manager"
+    },
+    {
+      "id": "pmay_gramin",
+      "name": "PM Awas Yojana - Gramin (PMAY-G)",
+      "hindi_name": "प्रधानमंत्री आवास योजना - ग्रामीण",
+      "category": "Housing & Infrastructure",
+      "government": "Central",
+      "ministry": "Ministry of Rural Development",
+      "summary": "Financial assistance of ₹1,20,000 in plain areas and ₹1,30,000 in hilly/difficult areas for pucca house construction with toilet.",
+      "benefits": {
+        "financial": "₹1,20,000 to ₹1,30,000 grant in installments + ₹12,000 Swachh Bharat toilet grant + 90 days MGNREGA wages (approx ₹20,000)",
+        "type": "Direct Grant for Housing"
+      },
+      "eligibility": {
+        "housing_status": ["Kutcha House", "Homeless", "Zero/One Room Kutcha Wall/Roof"],
+        "occupation": ["Any", "Rural Citizen"],
+        "max_income": 200000,
+        "exclusions": ["Motorized 2/3/4 wheeler owners", "Kisan credit card with limit >= ₹50,000", "Government employees"]
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Bank Passbook (DBT enabled)",
+        "Job Card Number (MGNREGA)",
+        "Photograph of existing kutcha dwelling site",
+        "Consent for Aadhaar linkage"
+      ],
+      "nodal_portal": "https://pmayg.nic.in",
+      "appeal_authority": "Block Development Officer (BDO) / District Collector"
+    },
+    {
+      "id": "sukanya_samriddhi",
+      "name": "Sukanya Samriddhi Yojana (SSY)",
+      "hindi_name": "सुकन्या समृद्धि योजना (बेटी बचाओ, बेटी पढ़ाओ)",
+      "category": "Women & Child",
+      "government": "Central",
+      "ministry": "Ministry of Finance / Post Office & Banks",
+      "summary": "High-interest (8.2%) government-backed savings scheme for girl children up to age 10 with Section 80C tax exemption and maturity at 21 years.",
+      "benefits": {
+        "interest_rate": "8.2% annual compounded interest (highest sovereign safe yield)",
+        "maturity": "Full maturity payout on higher education (18 yrs) or marriage (21 yrs)",
+        "min_deposit": "₹250 per year minimum"
+      },
+      "eligibility": {
+        "target": "Parents/legal guardians of girl child below 10 years of age",
+        "max_daughters": 2
+      },
+      "documents_required": [
+        "Birth Certificate of Girl Child",
+        "Parent/Guardian Aadhaar and PAN Card",
+        "Proof of Address",
+        "Passport size photographs"
+      ],
+      "nodal_portal": "https://www.indiapost.gov.in",
+      "appeal_authority": "Superintendent of Post Offices / Lead Bank Manager"
+    },
+    {
+      "id": "ignwps_widow_pension",
+      "name": "Indira Gandhi National Widow Pension Scheme (IGNWPS)",
+      "hindi_name": "इंदिरा गांधी राष्ट्रीय विधवा पेंशन योजना",
+      "category": "Social Security",
+      "government": "Central & State Joint",
+      "ministry": "Ministry of Rural Development (NSAP)",
+      "summary": "Monthly pension support for widowed women living below poverty line between ages 40 and 79.",
+      "benefits": {
+        "financial": "₹1,000 - ₹3,000 / month (depending on State topping up the Central ₹300 grant)",
+        "frequency": "Monthly direct to bank account"
+      },
+      "eligibility": {
+        "gender": ["Female"],
+        "marital_status": ["Widow"],
+        "min_age": 40,
+        "max_age": 79,
+        "economic_status": ["BPL", "Destitute", "Below Poverty Line"]
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Husband's Death Certificate",
+        "BPL Card or Valid Income Certificate (< ₹1,00,000/yr)",
+        "Bank Passbook with IFSC code",
+        "Age proof"
+      ],
+      "nodal_portal": "https://nsap.nic.in",
+      "appeal_authority": "Sub-Divisional Magistrate (SDM) / District Social Welfare Officer"
+    },
+    {
+      "id": "pm_mudra_shishu",
+      "name": "Pradhan Mantri MUDRA Yojana (Shishu & Kishore)",
+      "hindi_name": "प्रधानमंत्री मुद्रा योजना (माइक्रो एंटरप्राइज लोन)",
+      "category": "Financial Inclusion & MSME",
+      "government": "Central",
+      "ministry": "Department of Financial Services, Ministry of Finance",
+      "summary": "Collateral-free business loans up to ₹50,000 (Shishu) and up to ₹5,00,000 (Kishore) for micro-enterprises, small shops, and artisans.",
+      "benefits": {
+        "financial": "Up to ₹50,000 (Shishu) / ₹5,00,000 (Kishore) no-collateral credit at competitive bank interest rates",
+        "type": "Working capital & equipment financing"
+      },
+      "eligibility": {
+        "occupation": ["Small Shopkeeper", "Trader", "Artisan", "Micro Entrepreneur", "Service Provider", "Food Stalls"],
+        "min_age": 18
+      },
+      "documents_required": [
+        "Identity Proof (Aadhaar/Voter ID)",
+        "Address Proof",
+        "Quotation/Estimate for machinery or business stock",
+        "Bank statement past 6 months",
+        "Business establishment proof (if available)"
+      ],
+      "nodal_portal": "https://www.mudra.org.in",
+      "appeal_authority": "District Lead Bank Manager / State Level Bankers Committee"
+    },
+    {
+      "id": "rte_admission",
+      "name": "RTE Section 12(1)(c) Free School Admission",
+      "hindi_name": "शिक्षा का अधिकार (RTE) - 25% निःशुल्क निजी स्कूल प्रवेश",
+      "category": "Education & Child Welfare",
+      "government": "Central & State Joint",
+      "ministry": "Ministry of Education (Samagra Shiksha)",
+      "summary": "Mandatory 25% reserved seats in recognized private unaided schools for children from Economically Weaker Sections (EWS) and disadvantaged groups with zero tuition fees up to Class 8.",
+      "benefits": {
+        "value": "100% Free Tuition, Books, and Uniforms in nearby top private schools from Nursery/Class 1 up to Class 8",
+        "impact": "Saves ₹30,000 - ₹80,000 per year in school fees"
+      },
+      "eligibility": {
+        "child_age": "3 to 7 years (for Nursery/Class 1 entry)",
+        "economic_status": ["EWS", "BPL", "Income < ₹1,00,000 - ₹2,50,000/yr depending on state"],
+        "caste": ["SC", "ST", "OBC-Non-Creamy", "Disadvantaged Group"]
+      },
+      "documents_required": [
+        "Child's Birth Certificate",
+        "Parent Aadhaar Card",
+        "Domicile / Address proof within 1-3 km of school",
+        "Income Certificate or Caste Certificate"
+      ],
+      "nodal_portal": "State RTE Portal (e.g., rte25.upsdc.gov.in)",
+      "appeal_authority": "Basic Shiksha Adhikari (BSA) / District Education Officer (DEO)"
+    },
+    {
+      "id": "up_kanya_sumangala",
+      "name": "UP Mukhyamantri Kanya Sumangala Yojana",
+      "hindi_name": "उत्तर प्रदेश मुख्यमंत्री कन्या सुमंगला योजना",
+      "category": "State Specific - UP",
+      "government": "State (Uttar Pradesh)",
+      "ministry": "Women and Child Development Department, UP",
+      "summary": "Conditional cash transfer of ₹25,000 (revised) across 6 milestones from girl child's birth to graduation.",
+      "benefits": {
+        "financial": "Total ₹25,000 grant paid in 6 phases: birth (₹5k), vaccination (₹2k), Class 1 (₹3k), Class 6 (₹3k), Class 9 (₹5k), Diploma/Degree (₹7k)",
+        "target": "Daughters residing in Uttar Pradesh"
+      },
+      "eligibility": {
+        "state": ["Uttar Pradesh", "UP"],
+        "max_income": 300000,
+        "max_daughters": 2,
+        "domicile": "Permanent resident of UP"
+      },
+      "documents_required": [
+        "UP Domicile Certificate (Niwas Praman Patra)",
+        "Parent Income Certificate (< ₹3L)",
+        "Girl's Birth Certificate",
+        "Bank Passbook (Joint account with mother/father)",
+        "Affidavit regarding family size"
+      ],
+      "nodal_portal": "https://mksy.up.gov.in",
+      "appeal_authority": "District Probation Officer (DPO), UP"
+    },
+    {
+      "id": "mp_ladli_behna",
+      "name": "MP Mukhyamantri Ladli Behna Yojana",
+      "hindi_name": "मध्य प्रदेश मुख्यमंत्री लाड़ली बहना योजना",
+      "category": "State Specific - MP",
+      "government": "State (Madhya Pradesh)",
+      "ministry": "Women and Child Development Department, MP",
+      "summary": "Monthly financial aid of ₹1,250 transferred directly into the bank accounts of married women aged 21-60.",
+      "benefits": {
+        "financial": "₹1,250 / month (₹15,000 per year) direct DBT",
+        "type": "Unconditional women financial empowerment DBT"
+      },
+      "eligibility": {
+        "state": ["Madhya Pradesh", "MP"],
+        "gender": ["Female"],
+        "min_age": 21,
+        "max_age": 60,
+        "max_income": 250000,
+        "exclusions": ["Tractor / 4-wheeler owner", "Govt job family", "Income tax payer"]
+      },
+      "documents_required": [
+        "Samagra Family ID & Member ID (e-KYC completed)",
+        "Aadhaar Card",
+        "Bank Account (Aadhaar linked & DBT active)",
+        "MP Domicile Certificate"
+      ],
+      "nodal_portal": "https://cmladlibahna.mp.gov.in",
+      "appeal_authority": "Gram Panchayat Sachiv / Ward Incharge / SDM"
+    },
+    {
+      "id": "eshram_social_security",
+      "name": "e-Shram National Unorganized Workers Register",
+      "hindi_name": "ई-श्रम असंगठित कर्मकार कल्याण योजना",
+      "category": "Social Security & Labour",
+      "government": "Central",
+      "ministry": "Ministry of Labour & Employment",
+      "summary": "Universal Account Number (UAN) with free accidental insurance cover of ₹2,00,000 under PMSBY and priority DBT access in crises.",
+      "benefits": {
+        "insurance": "₹2 Lakh accidental death / permanent disability cover + ₹1 Lakh partial disability",
+        "identity": "12-digit permanent Universal Account Number (UAN)",
+        "social_security": "Direct linkage to state welfare boards and central emergency assistance"
+      },
+      "eligibility": {
+        "occupation": ["Agricultural Laborer", "Construction Worker", "Gig/Delivery Worker", "Domestic Helper", "Rickshaw Puller", "Fisherman", "Unorganized Sector Worker"],
+        "min_age": 16,
+        "max_age": 59,
+        "exclusions": ["Member of EPFO or ESIC", "Income tax payer"]
+      },
+      "documents_required": [
+        "Aadhaar Card",
+        "Aadhaar-linked Mobile Number",
+        "Bank Account details (Savings Bank Account No. & IFSC)"
+      ],
+      "nodal_portal": "https://eshram.gov.in",
+      "appeal_authority": "District Labour Commissioner (DLC)"
+    }
+  ]
+}
