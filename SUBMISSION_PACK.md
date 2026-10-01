@@ -1,5 +1,8 @@
 # 📋 BHARATAGENTIC HACKATHON 2026 — OFFICIAL SUBMISSION PACK
 ### Ready-to-Paste Form Answers & Submission Guide
+**Team Name:** CodeNova  
+**Team Members:** Harsh Deep Chak (Lead) & Pallak Devi  
+**GitHub Repository:** https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon  
 **Target:** 1st Rank Champion Submission • Powered by aiKart
 
 ---
@@ -9,10 +12,11 @@
 - [x] **Project Code & Backend:** Completed & verified with 5 specialized sub-agents.
 - [x] **aiKart Manifest:** Generated at `aikart-manifest.yaml` (v1 compliant).
 - [x] **Docker Container:** `Dockerfile` tested with zero-egress sandbox execution.
-- [x] **Interactive Web Dashboard:** Live at `http://127.0.0.1:8000` (Dark/Light mode, live telemetry).
-- [x] **Artifacts Generated:** Real ReportLab PDF dossiers + CPGRAMS administrative appeals.
+- [x] **Interactive Web Dashboard:** Live at `http://127.0.0.1:8000` (Dark/Light mode, live telemetry, dynamic customizer).
+- [x] **Artifacts Generated:** Real ReportLab PDF dossiers (with QR codes) + CPGRAMS administrative appeals.
 - [x] **Pitch Deck:** Available in markdown (`PITCH_DECK.md`) and interactive browser deck (`/static/pitch.html`).
 - [x] **Demo Video Script:** 2.5-minute timed script ready at `DEMO_VIDEO_SCRIPT.md`.
+- [x] **Team Details:** CodeNova (Harsh Deep Chak & Pallak Devi) linked across all docs.
 
 ---
 
@@ -23,17 +27,28 @@
 Jan-Sahayak AI (जन-सहायक) — Autonomous Civic & Welfare Delivery Agent for Bharat
 ```
 
-### 2. Category / Track:
+### 2. Team Name & Members:
+```
+Team Name: CodeNova
+Members: Harsh Deep Chak (Lead) & Pallak Devi
+```
+
+### 3. Category / Track:
 ```
 Citizen & GovTech (also addressing Bharat Languages & Rural Inclusion)
 ```
 
-### 3. One-Line Tagline / Summary:
+### 4. GitHub Repository Link:
+```
+https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon
+```
+
+### 5. One-Line Tagline / Summary:
 ```
 An autonomous multi-agent civic delivery agent that audits 50+ Central & State welfare schemes, calculates document readiness, mints official print-ready application dossiers (PDFs), and drafts statutory CPGRAMS legal appeals for 800M+ citizens in under 100 milliseconds.
 ```
 
-### 4. Problem Statement (Detailed):
+### 6. Problem Statement (Detailed):
 ```
 Every year, the Government of India and State Governments allocate over ₹4 Lakh Crores across 800+ welfare schemes (such as PM-Kisan, Ayushman Bharat, PMAY Housing, PM SVANidhi, PM Vishwakarma, pensions, and scholarships). Despite these massive budgetary outlays, over 70% of eligible citizens in rural and semi-urban Bharat miss out on life-changing benefits. 
 

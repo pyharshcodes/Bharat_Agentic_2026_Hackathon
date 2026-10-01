@@ -1,10 +1,13 @@
 # 🇮🇳 Jan-Sahayak AI (जन-सहायक)
 ### Autonomous Civic & Welfare Delivery Agent for Bharat
-**Built for BharatAgentic Hackathon 2026 • Powered by aiKart**
+**Built by Team CodeNova for BharatAgentic Hackathon 2026 • Powered by aiKart**  
+**Team Members:** Harsh Deep Chak (Lead) & Pallak Devi  
+**GitHub Repository:** [https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon](https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon)
 
 [![aiKart Sandbox](https://img.shields.io/badge/aiKart-Try%20Me%20Now%20Sandbox%20Ready-orange.svg)](https://aikart.co)
-[![FastAPI](https://img.shields.io/badge/API-FastAPI%201.0.0-green.svg)](http://127.0.0.1:8000/docs)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI%201.1.0-green.svg)](http://127.0.0.1:8000/docs)
 [![Latency](https://img.shields.io/badge/Execution%20Latency-%3C100ms-blue.svg)](#performance)
+[![Team](https://img.shields.io/badge/Team-CodeNova-purple.svg)](https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ---

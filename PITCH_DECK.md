@@ -1,11 +1,14 @@
 # 🏆 JAN-SAHAYAK AI (जन-सहायक) — PITCH DECK
 ### BharatAgentic Hackathon 2026 • Powered by aiKart
+**Presented by Team CodeNova: Harsh Deep Chak (Lead) & Pallak Devi**  
+**Repository:** https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon  
 **"From Welfare Maze to Autonomous Citizen Entitlement"**
 
 ---
 
 ## 📌 SLIDE 1: The Title & Mission
 * **Project Name:** Jan-Sahayak AI (जन-सहायक)
+* **Team:** CodeNova (Harsh Deep Chak & Pallak Devi)
 * **Tagline:** Autonomous Civic & Welfare Delivery Agent for Bharat
 * **Track:** Citizen & GovTech / Bharat Languages
 * **The Core Premise:** Transitioning 800M+ citizens from passive "scheme searchers" to active, verified, and entitled beneficiaries through a multi-agent cognitive swarm.

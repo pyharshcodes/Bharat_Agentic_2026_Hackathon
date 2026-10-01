@@ -53,10 +53,45 @@ class AgentRunRequest(BaseModel):
 def health_check():
     return {
         "status": "HEALTHY",
-        "service": "Jan-Sahayak AI",
-        "version": "1.0.0",
-        "sandbox_ready": True
+        "service": "Jan-Sahayak AI (जन-सहायक)",
+        "team": "CodeNova",
+        "members": ["Harsh Deep Chak", "Pallak Devi"],
+        "version": "1.1.0",
+        "sandbox_ready": True,
+        "repo": "https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon"
     }
+
+
+@app.get("/api/schemes")
+def get_all_schemes():
+    """Returns the full catalogue of government schemes for deep dive modal."""
+    return {"schemes": orchestrator.scheme_engine.schemes}
+
+
+@app.post("/api/digilocker-fetch")
+def digilocker_fetch(payload: Dict[str, Any] = Body(...)):
+    """
+    Simulates autonomous DigiLocker retrieval of verified certificates (Aadhaar, Ration Card, Domicile).
+    """
+    profile = payload.get("profile", {})
+    existing = set(profile.get("existing_documents", []))
+    # Simulated DigiLocker synced certificates
+    simulated_retrieved = [
+        "Aadhaar Card",
+        "Ration Card (NFSA or State BPL Card)",
+        "Land Ownership Records (Khasra/Khatauni/ROR)",
+        "UP Domicile Certificate (Niwas Praman Patra)",
+        "Bank Account details (Aadhaar linked NPCI seeded)"
+    ]
+    for doc in simulated_retrieved:
+        existing.add(doc)
+    profile["existing_documents"] = list(existing)
+    
+    # Re-run evaluation & gap audit
+    result = orchestrator.run_agentic_workflow(profile, generate_pdf=True)
+    result["digilocker_synced"] = True
+    result["newly_fetched"] = [d for d in simulated_retrieved if d not in payload.get("profile", {}).get("existing_documents", [])]
+    return result
 
 
 @app.get("/api/personas")

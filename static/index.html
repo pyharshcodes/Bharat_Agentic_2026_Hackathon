@@ -27,10 +27,13 @@
       </div>
 
       <div class="header-badges">
+        <a href="https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon" target="_blank" class="github-btn" title="View Source on GitHub">
+          <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
+          GitHub
+        </a>
         <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙 Dark Mode</button>
-        <span class="badge badge-accent">🏆 BharatAgentic 2026</span>
+        <span class="badge badge-accent">🏆 CodeNova</span>
         <span class="badge badge-success"><span class="dot-pulse"></span> Sandbox Ready</span>
-        <span class="badge badge-outline">Multi-Agent Swarm</span>
       </div>
     </div>
   </header>
@@ -47,8 +50,11 @@
     <!-- Interactive Persona Selector Deck -->
     <section class="persona-section">
       <div class="section-title-wrap">
-        <h2>1. Select Citizen Persona <span class="sub-label">(1-Click Live Test for Hackathon Judges)</span></h2>
-        <span class="hint">Click any persona to auto-populate profile and trigger the multi-agent reasoning chain:</span>
+        <div>
+          <h2>1. Select Citizen Persona <span class="sub-label">(1-Click Live Test for Hackathon Judges)</span></h2>
+          <span class="hint">Click any persona or customize real-time parameters:</span>
+        </div>
+        <button id="openCustomizerBtn" class="customizer-btn">⚙️ Custom Citizen Simulator</button>
       </div>
 
       <div class="persona-grid" id="personaGrid">
@@ -227,8 +233,18 @@
       <!-- Left Column: Qualified Schemes -->
       <div class="results-left">
         <div class="section-title-wrap">
-          <h2>3. Certified Welfare Entitlements</h2>
-          <span class="sub-label" id="schemesFoundLabel">Showing matching schemes</span>
+          <div>
+            <h2>3. Certified Welfare Entitlements</h2>
+            <span class="sub-label" id="schemesFoundLabel">Showing matching schemes</span>
+          </div>
+          <div class="category-filters" id="categoryFilters">
+            <button class="filter-chip active" data-cat="all">All</button>
+            <button class="filter-chip" data-cat="Agriculture">🌾 Agri</button>
+            <button class="filter-chip" data-cat="Healthcare">🏥 Health</button>
+            <button class="filter-chip" data-cat="Housing & Infrastructure">🏠 Housing</button>
+            <button class="filter-chip" data-cat="Financial Inclusion">🛒 MSME</button>
+            <button class="filter-chip" data-cat="Social Security">👵 Social</button>
+          </div>
         </div>
         <div class="schemes-list" id="schemesList">
           <!-- Dynamic Scheme Cards injected here -->
@@ -254,7 +270,10 @@
 
         <!-- Document Gap Audit -->
         <div class="doc-audit-card">
-          <h4>📑 Document Compliance Audit</h4>
+          <div class="doc-audit-head">
+            <h4>📑 Document Compliance Audit</h4>
+            <button id="digilockerFetchBtn" class="digilocker-btn" title="Simulate National DigiLocker Sync">🔗 Fetch via DigiLocker</button>
+          </div>
           <div id="docAuditList" class="doc-audit-list">
             <!-- Dynamic Document rows -->
           </div>
@@ -282,14 +301,14 @@
   <footer class="app-footer">
     <div class="footer-container">
       <div>
-        <strong>Jan-Sahayak AI (जन-सहायक)</strong> • BharatAgentic Hackathon 2026 Champion Contender
+        <strong>Jan-Sahayak AI (जन-सहायक)</strong> • Built with ❤️ for Bharat by <strong>Team CodeNova</strong> (Harsh Deep Chak & Pallak Devi)
       </div>
       <div class="footer-links">
-        <a href="/docs" target="_blank">OpenAPI Docs</a>
+        <a href="/static/pitch.html" target="_blank">📊 10-Slide Pitch Deck</a>
         <span>•</span>
-        <a href="https://aikart.co" target="_blank">aiKart Marketplace</a>
+        <a href="https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon" target="_blank">GitHub Repository</a>
         <span>•</span>
-        <span>Zero-Egress Deterministic Mode</span>
+        <a href="/docs" target="_blank">OpenAPI Swagger</a>
       </div>
     </div>
   </footer>
@@ -314,6 +333,103 @@
         <div class="modal-trace-box" id="modalTraceContent">--</div>
         <div class="modal-section-title">Raw Telemetry Payload:</div>
         <pre class="modal-json-box" id="modalJsonContent"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Citizen Profile Customizer Modal -->
+  <div class="modal-backdrop" id="profileCustomizerModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-icon">⚙️</span>
+          <h3>Dynamic Citizen Simulator (Live Agent Recalculation)</h3>
+        </div>
+        <button class="modal-close-btn" id="customizerCloseBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Adjust parameters below and click Execute to observe deterministic multi-agent reasoning in real time:</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Citizen Full Name:</label>
+            <input type="text" id="custName" value="Shyam Sundar Sharma" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label>Age & Gender:</label>
+            <div style="display:flex; gap:8px;">
+              <input type="number" id="custAge" value="45" style="width:70px;" class="form-input" />
+              <select id="custGender" class="form-input" style="flex:1;">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>State & Domicile:</label>
+            <select id="custState" class="form-input">
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Madhya Pradesh">Madhya Pradesh</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Bihar">Bihar</option>
+              <option value="Maharashtra">Maharashtra</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Primary Occupation:</label>
+            <select id="custOccupation" class="form-input">
+              <option value="Farmer">Farmer (Agriculturalist)</option>
+              <option value="Street Vendor">Street Vendor (Hawker/Thelawala)</option>
+              <option value="Artisan">Artisan / Traditional Craftsman</option>
+              <option value="Unorganized Laborer">Daily Wage Laborer</option>
+              <option value="Unemployed">Low Income / General</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Annual Income (₹): <strong id="custIncomeVal">₹ 1,20,000</strong></label>
+            <input type="range" id="custIncome" min="30000" max="600000" step="10000" value="120000" class="form-range" />
+          </div>
+          <div class="form-group">
+            <label>Cultivable Land (Acres): <strong id="custLandVal">1.5 Acres</strong></label>
+            <input type="range" id="custLand" min="0" max="8" step="0.1" value="1.5" class="form-range" />
+          </div>
+          <div class="form-group">
+            <label>Social Category / Caste:</label>
+            <select id="custCaste" class="form-input">
+              <option value="OBC">OBC (Other Backward Class)</option>
+              <option value="SC">SC (Scheduled Caste)</option>
+              <option value="ST">ST (Scheduled Tribe)</option>
+              <option value="General">General / EWS</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Daughters Count (under 10y):</label>
+            <select id="custDaughters" class="form-input">
+              <option value="0">0 Daughters</option>
+              <option value="1">1 Daughter</option>
+              <option value="2" selected>2 Daughters</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
+          <button class="nav-btn" id="cancelCustomizerBtn">Cancel</button>
+          <button class="launch-btn" id="applyCustomizerBtn">⚡ Re-Audit with Custom Profile</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scheme Detail Modal -->
+  <div class="modal-backdrop" id="schemeDetailModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-icon">🏛️</span>
+          <h3 id="detailSchemeTitle">Scheme Title</h3>
+        </div>
+        <button class="modal-close-btn" id="schemeModalCloseBtn">✕</button>
+      </div>
+      <div class="modal-body" id="schemeModalBody">
+        <!-- Injected via JavaScript -->
       </div>
     </div>
   </div>
