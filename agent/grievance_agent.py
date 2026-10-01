@@ -1,96 +1,147 @@
 """
-Jan-Sahayak AI - CPGRAMS & Citizen Grievance Redressal Agent
-Drafts legally rigorous, formal administrative grievance petitions and RTI appeals for delayed or denied civic services.
+Jan-Sahayak AI - CPGRAMS & Citizen Grievance Assistant Agent
+Drafts legally rigorous, formal administrative grievance petitions and appeals for delayed or denied civic services.
+Uses ONLY verified public service guarantee principles and citizen charter timelines.
 """
 
 from typing import Dict, Any, Optional
 from datetime import datetime
 
 
+GRIEVANCE_TEMPLATES = {
+    "pension_delayed": {
+        "title": "Widow / Old-Age Pension Disbursement Delayed",
+        "default_detail": "Application for statutory pension submitted with verified KYC and death/age certificates; Direct Benefit Transfer (DBT) has not been released beyond the statutory 30-day Citizen Charter timeline.",
+        "requested_relief": "Immediate sanction order release and clearance of accumulated monthly pension arrears directly into the bank account.",
+        "supporting_docs": ["Death Certificate / Age Proof", "Aadhaar e-KYC Copy", "Bank Passbook with active NPCI seeding", "Acknowledgement receipt"]
+    },
+    "ration_issue": {
+        "title": "NFSA Ration Card Inclusion / PDS Quota Denied",
+        "default_detail": "Eligible household member name wrongly omitted or fair price shop (PDS) dealer refusing statutory grain quota citing biometric mismatch.",
+        "requested_relief": "Immediate restoration of ration entitlement, Fair Price Shop inspection, and offline OTP/manual register override for grain disbursement.",
+        "supporting_docs": ["Existing Ration Card copy", "Family Aadhaar copies", "Income Certificate / BPL proof", "Recent Fair Price Shop visit records"]
+    },
+    "dbt_not_received": {
+        "title": "Direct Benefit Transfer (DBT) Failure / NPCI Seeding Issue",
+        "default_detail": "Approved government welfare installment (e.g., PM-Kisan / Scholarship / Housing) showing successful government release but amount not credited to bank account.",
+        "requested_relief": "PFMS transaction tracing, verification of NPCI Aadhaar bank mapping, and immediate re-push of failed transfer transaction.",
+        "supporting_docs": ["Bank Statement showing non-credit", "Scheme Registration / Beneficiary Number", "Bank Aadhaar Seeding Confirmation"]
+    },
+    "application_rejected": {
+        "title": "Arbitrary Rejection of Welfare Application without Speaking Order",
+        "default_detail": "Application rejected without providing specific deficiency letter, opportunity of hearing, or written reasoned speaking order as mandated under natural justice principles.",
+        "requested_relief": "Re-opening of application dossier, formal disclosure of specific ground of rejection, and fresh administrative review.",
+        "supporting_docs": ["Original Application Form & Acknowledgement Receipt", "Rejection Notice / Portal Screenshot", "Complete supporting eligibility documents"]
+    },
+    "subsidy_not_received": {
+        "title": "Approved Agricultural / Business Subsidy Withheld",
+        "default_detail": "Subsidy sanctioned for agricultural equipment or micro-enterprise credit has been delayed at the nodal department level for over 60 days.",
+        "requested_relief": "Expedited administrative sanction clearance and credit of subsidy amount to the lending bank branch.",
+        "supporting_docs": ["Bank Sanction Letter", "Equipment Purchase / Tax Invoice", "Physical Verification Inspection Report"]
+    },
+    "service_delay": {
+        "title": "General Civic Service Delay Beyond Citizen Charter SLA",
+        "default_detail": "Statutory citizen service (e.g., Domicile Certificate, Caste Certificate, or Land Mutation) pending beyond the statutory delivery timeline prescribed under the State Public Services Guarantee Act.",
+        "requested_relief": "Immediate issuance of requested certificate / service order and fixing of accountability on the erring nodal officer under Public Services Guarantee rules.",
+        "supporting_docs": ["e-District Acknowledgement Slip", "Date of Application Proof", "Identity Proof"]
+    }
+}
+
+
 class GrievanceRedressalAgent:
     """Agent that creates structured administrative appeals and CPGRAMS filings."""
 
     def __init__(self):
-        self.name = "Grievance Redressal & Legal Drafting Agent"
+        self.name = "Grievance Assistant & Administrative Appeals Agent"
 
-    def draft_petition(self, profile: Dict[str, Any], grievance_info: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    def draft_petition(self, profile: Dict[str, Any], grievance_input: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         """
-        Drafts a formal administrative petition with citations of relevant public service guarantee timelines.
+        Drafts a formal administrative petition with verified citizen charter references.
         """
-        if grievance_info is None:
-            grievance_info = profile.get("grievance_case")
+        if grievance_input is None:
+            grievance_input = profile.get("grievance_case") or {}
 
-        if not grievance_info:
-            # Default proactive grievance template for delayed DBT
-            grievance_info = {
-                "type": "Delayed Welfare Benefit Disbursement",
-                "portal": "State Public Grievance Portal / CPGRAMS",
-                "application_no": "JS-GREV-" + datetime.now().strftime("%Y%m%d%H"),
-                "days_pending": 75,
-                "grievance_detail": f"Application submitted by {profile.get('name')} for eligible welfare scheme remains unacted upon beyond statutory citizen charter timelines."
-            }
+        # Resolve issue type key
+        issue_key = grievance_input.get("issue_type", "pension_delayed").lower().replace(" ", "_")
+        if issue_key not in GRIEVANCE_TEMPLATES:
+            # Map loosely
+            if "pension" in issue_key: issue_key = "pension_delayed"
+            elif "ration" in issue_key: issue_key = "ration_issue"
+            elif "dbt" in issue_key: issue_key = "dbt_not_received"
+            elif "reject" in issue_key: issue_key = "application_rejected"
+            elif "subsidy" in issue_key: issue_key = "subsidy_not_received"
+            else: issue_key = "service_delay"
 
-        name = profile.get("name", "Aggrieved Citizen")
-        district = profile.get("district", "District Magistrate")
-        state = profile.get("state", "Uttar Pradesh")
-        app_no = grievance_info.get("application_no", "NA")
-        days = grievance_info.get("days_pending", 45)
-        detail = grievance_info.get("grievance_detail", "Administrative delay in processing welfare entitlement.")
-        case_type = grievance_info.get("type", "Civic Grievance")
+        template = GRIEVANCE_TEMPLATES[issue_key]
+
+        name = profile.get("name", "Aggrieved Citizen").strip()
+        district = profile.get("district", "Gorakhpur").strip()
+        state = profile.get("state", "Uttar Pradesh").strip()
+        app_no = grievance_input.get("application_no", "BHARAT-APP-" + datetime.now().strftime("%Y%m%d"))
+        days = grievance_input.get("days_pending", 45)
+        detail = grievance_input.get("grievance_detail") or template["default_detail"]
+        scheme_name = grievance_input.get("scheme_name", "Statutory Citizen Welfare Scheme")
+
+        subject_line = f"Formal Administrative Grievance regarding {template['title']} [Application Ref: {app_no}] — Unreasonable delay of {days} days violating Citizen Charter SLA."
 
         petition_text = f"""================================================================================
-FORMAL PETITION UNDER THE CITIZEN'S CHARTER & PUBLIC SERVICES GUARANTEE ACT
-FILED BEFORE: THE DISTRICT MAGISTRATE / NODAL APPELLATE AUTHORITY, {district.upper()}, {state.upper()}
+FORMAL ADMINISTRATIVE GRIEVANCE PETITION
+UNDER THE CITIZEN'S CHARTER & STATE PUBLIC SERVICES GUARANTEE RULES
+BEFORE: THE DISTRICT MAGISTRATE / NODAL APPELLATE AUTHORITY, {district.upper()}, {state.upper()}
 ================================================================================
 
-PETITIONER DETAILS:
-Name: {name}
-S/o or W/o: (As recorded in Aadhaar registry)
-Address: Resident of District {district}, State of {state}
-Category: {profile.get('caste', 'General')} | Occupation: {profile.get('occupation', 'Citizen')}
-Annual Household Income: ₹{profile.get('annual_income', 0):,.0f}
+1. PETITIONER IDENTIFICATION:
+   • Full Name: {name}
+   • Residential Jurisdiction: District {district}, State of {state}
+   • Socio-Economic Category: {profile.get('social_category', 'General')} | Occupation: {profile.get('occupation', 'Citizen')}
+   • Annual Household Income: ₹{profile.get('annual_income', 0):,.0f}
 
-SUBJECT: 
-Formal Grievance Petition regarding {case_type} under Scheme Application Ref: [{app_no}] — Unreasonable delay of {days} days violating statutory delivery timelines.
+2. SUBJECT:
+   {subject_line}
 
-RESPECTED SIR/MADAM,
+3. CASE SUMMARY & TIMELINE:
+   a. Beneficiary Scheme: {scheme_name}
+   b. Reference / Registration Number: {app_no}
+   c. Duration of Unresolved Pendency: {days} Calendar Days
+   d. Factual Statement of Grievance:
+      "{detail}"
 
-1. PRELIMINARY STATEMENT:
-The Petitioner is an eligible, bona fide citizen of Bharat residing within your administrative jurisdiction, satisfying all socio-economic criteria prescribed under the relevant Central & State statutory welfare rules.
+4. VERIFIED STATUTORY BASIS:
+   Under the State Public Services Guarantee Directives and the Citizen's Charter of the Government of India, welfare benefit processing and direct transfer clearances carry a mandated resolution timeline of thirty (30) business days. Continued inaction of {days} days violates these statutory service commitments.
 
-2. STATEMENT OF FACTS:
-a. On the registered date, the petitioner duly submitted the complete application dossier with verified KYC and mandatory documentation under Application No. {app_no}.
-b. As of today's date ({datetime.now().strftime('%d %B %Y')}), a total duration of {days} calendar days has elapsed without formal approval, disbursement, or reasoned speaking order.
-c. Factual Grievance: "{detail}"
+5. PRAYER FOR RESOLUTION:
+   The petitioner respectfully requests:
+   i. Immediate issuance of formal administrative instructions to the concerned Nodal Department to clear the pending benefit without arbitrary delay.
+   ii. In case of any technical or document discrepancy, a formal speaking requisition be served in writing within 48 hours.
+   iii. Direct escalation to the Centralized Public Grievance Redress and Monitoring System (CPGRAMS) and the Hon'ble Chief Minister's Monitoring Cell if unresolved within 7 days.
 
-3. STATUTORY INFRACTION & LEGAL CITATION:
-Under the State Public Services Guarantee Act and the Government of Bharat Citizen's Charter, statutory welfare benefits and Direct Benefit Transfers (DBT) carry a mandated resolution SLA of thirty (30) business days. The continued pendency of {days} days constitutes administrative deficiency and actionable grievance under Section 19 of the General Administrative Directives.
-
-4. PRAYER FOR RELIEF:
-In light of the aforesaid facts, the petitioner respectfully prays that:
-i. A direction be immediately issued to the concerned Block Development Officer (BDO) / Tehsildar / District Nodal Officer to clear the pending DBT without arbitrary delay.
-ii. If any auxiliary document is ostensibly required, an explicit, written requisition be served within forty-eight (48) hours rather than keeping the dossier in perpetual pendency.
-iii. In default whereof, this grievance be escalated to the Centralized Public Grievance Redress and Monitoring System (CPGRAMS) and the Hon'ble Chief Minister's Special Monitoring Cell for administrative inquiry.
+6. SUPPORTING DOCUMENTS ATTACHED:
+   {chr(10).join([f"   • {d}" for d in template['supporting_docs']])}
 
 VERIFICATION:
-I, {name}, do hereby verify that the facts stated in paragraphs 1 to 4 are true and correct to my personal knowledge.
+I, {name}, do hereby verify that the facts stated above are true and accurate to the best of my knowledge.
 
 Date: {datetime.now().strftime('%d/%m/%Y')}
 Place: {district}, {state}
-
-(Digital Verification Generated via Jan-Sahayak Autonomous Civic Agent)
+(Generated via Jan-Sahayak AI Civic Assistant • Team Bits and Bytes)
 ================================================================================
 """
 
         return {
-            "petition_title": f"CPGRAMS Grievance Petition: {case_type}",
+            "issue_key": issue_key,
+            "petition_title": template["title"],
+            "subject": subject_line,
             "application_reference": app_no,
             "days_delayed": days,
-            "authority": f"District Magistrate & Nodal Officer, {district}, {state}",
+            "scheme_name": scheme_name,
+            "authority": f"District Magistrate & Nodal Appellate Authority, {district}, {state}",
+            "citizen_name": name,
+            "requested_resolution": template["requested_relief"],
+            "supporting_documents": template["supporting_docs"],
             "petition_text": petition_text,
-            "recommended_submission_portals": [
-                {"name": "CPGRAMS National Portal", "url": "https://pgportal.gov.in"},
-                {"name": f"{state} CM Helpline", "toll_free": "1076 / 181"},
-                {"name": "District Collector Jan Sunwai", "mode": "In-person / District Portal"}
+            "escalation_channels": [
+                {"name": "Central CPGRAMS Portal", "url": "https://pgportal.gov.in"},
+                {"name": f"{state} CM Helpline", "contact": "1076 / 181"},
+                {"name": "District Jan Sunwai Desk", "contact": f"Collectorate, {district}"}
             ]
         }

@@ -54,7 +54,7 @@ def health_check():
     return {
         "status": "HEALTHY",
         "service": "Jan-Sahayak AI (जन-सहायक)",
-        "team": "CodeNova",
+        "team": "Bits and Bytes",
         "members": ["Harsh Deep Chak", "Pallak Devi"],
         "version": "1.1.0",
         "sandbox_ready": True,
@@ -142,7 +142,7 @@ def generate_grievance(payload: Dict[str, Any] = Body(...)):
     Generates a dedicated formal CPGRAMS / Citizen Charter grievance petition.
     """
     try:
-        profile = payload.get("profile", DEMO_PERSONAS["kamala_widow"])
+        profile = payload.get("profile") or DEMO_PERSONAS.get("kavita_widow", {})
         grievance_info = payload.get("grievance_info")
         petition = orchestrator.grievance_agent.draft_petition(profile, grievance_info)
         return petition

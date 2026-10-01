@@ -3,37 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jan-Sahayak AI (जन-सहायक) — Autonomous Civic & Welfare Agent</title>
+  <title>Jan-Sahayak AI (जन-सहायक) — Autonomous Welfare & Civic Rights Action Agent for Bharat</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
-  <!-- Sovereign Top Banner -->
+  <!-- Sovereign Top Banner (Indian Tricolor Accent) -->
   <div class="tricolor-strip"></div>
   
+  <!-- App Header -->
   <header class="app-header">
     <div class="header-container">
       <div class="brand">
-        <div class="emblem-badge">🇮🇳</div>
+        <div class="emblem-badge" title="National Emblem of Bharat">🇮🇳</div>
         <div>
           <div class="brand-title">
-            <span class="hindi-highlight">जन-सहायक</span>
-            <span class="eng-highlight">Jan-Sahayak AI</span>
+            <span class="hindi-highlight">जन-सहायक AI</span>
+            <span class="eng-highlight">JAN-SAHAYAK AI</span>
           </div>
-          <p class="brand-subtitle">Autonomous Civic & Welfare Delivery Agent for Bharat • Powered by aiKart</p>
+          <p class="brand-tagline">"From Welfare Discovery to Welfare Delivery."</p>
+          <p class="brand-subtitle">Autonomous Welfare & Civic Rights Action Agent for Bharat • Powered by aiKart</p>
         </div>
       </div>
 
       <div class="header-badges">
-        <a href="https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon" target="_blank" class="github-btn" title="View Source on GitHub">
-          <svg height="16" viewBox="0 0 16 16" width="16" fill="currentColor" style="vertical-align: text-bottom; margin-right: 4px;"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path></svg>
-          GitHub
-        </a>
-        <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙 Dark Mode</button>
-        <span class="badge badge-accent">🏆 CodeNova</span>
-        <span class="badge badge-success"><span class="dot-pulse"></span> Sandbox Ready</span>
+        <span class="badge badge-accent">🏆 Team Bits and Bytes</span>
+        <span class="badge badge-success"><span class="dot-pulse"></span> Operational (aiKart Sandbox)</span>
+        <span class="badge badge-neutral">📜 12 Verified Schemes</span>
+        <a href="/static/pitch.html" target="_blank" class="nav-link-btn" title="View 10-Slide Pitch Deck">📊 Pitch Deck</a>
+        <a href="/docs" target="_blank" class="nav-link-btn" title="OpenAPI Swagger Documentation">⚡ API Docs</a>
       </div>
     </div>
   </header>
@@ -43,7 +43,73 @@
     <section class="hero-section">
       <div class="hero-content">
         <h1>Transforming 800M+ Citizens from <em>Welfare Seekers</em> to <em>Autonomous Entitled Beneficiaries</em>.</h1>
-        <p>Beyond chatbots: A deterministic multi-agent engine that audits 50+ government welfare schemes, calculates statutory eligibility, detects missing document gaps, mints official application dossiers, and drafts legally cited CPGRAMS appeals.</p>
+        <p>Beyond chatbots: A deterministic 8-agent cognitive swarm that audits 12 verified Central & State government schemes, computes statutory eligibility, audits missing documents, mints official application dossiers (draft PDFs for CSC submission), and drafts legally cited CPGRAMS appeals under Citizen Charter 30-day statutory SLAs.</p>
+      </div>
+    </section>
+
+    <!-- Executive Dashboard: "Your Welfare Opportunity" -->
+    <section class="executive-dashboard" id="executiveDashboard">
+      <div class="dashboard-header">
+        <div class="dashboard-title-wrap">
+          <span class="dash-icon">🏛️</span>
+          <div>
+            <h3>Your Welfare Opportunity Board</h3>
+            <p id="dashboardCitizenSubtitle">Deterministic entitlement analysis for Ramesh (Small Farmer in UP)</p>
+          </div>
+        </div>
+        <div class="dashboard-actions">
+          <span class="timestamp-badge" id="lastAuditedBadge">Audited: Just now</span>
+        </div>
+      </div>
+
+      <div class="opportunity-grid">
+        <!-- Bucket 1: Eligible -->
+        <div class="opp-card opp-eligible">
+          <div class="opp-card-top">
+            <span class="opp-icon">✅</span>
+            <span class="opp-badge status-eligible-pill">ELIGIBLE</span>
+          </div>
+          <div class="opp-val" id="metricEligibleCount">--</div>
+          <div class="opp-lbl">Direct Entitlements Qualified</div>
+          <div class="opp-sub" id="metricEligibleValue">₹0 / year</div>
+          <div class="opp-foot">Statutory Criteria Met ✓</div>
+        </div>
+
+        <!-- Bucket 2: Potentially Eligible -->
+        <div class="opp-card opp-potential">
+          <div class="opp-card-top">
+            <span class="opp-icon">⚡</span>
+            <span class="opp-badge status-potential-pill">POTENTIALLY ELIGIBLE</span>
+          </div>
+          <div class="opp-val" id="metricPotentialCount">--</div>
+          <div class="opp-lbl">High-Probability Schemes</div>
+          <div class="opp-sub" id="metricPotentialValue">₹0 unlockable</div>
+          <div class="opp-foot">Requires 1 Document or Action</div>
+        </div>
+
+        <!-- Bucket 3: Document Compliance -->
+        <div class="opp-card opp-compliance">
+          <div class="opp-card-top">
+            <span class="opp-icon">📑</span>
+            <span class="opp-badge status-audit-pill">DOCUMENT COMPLIANCE</span>
+          </div>
+          <div class="opp-val" id="metricReadinessScore">--%</div>
+          <div class="opp-lbl">Dossier Readiness Score</div>
+          <div class="opp-sub" id="metricMissingDocsCount">-- Missing Document(s)</div>
+          <div class="opp-foot"><a href="#docAuditSection" class="jump-link">View Missing Checklist ↓</a></div>
+        </div>
+
+        <!-- Bucket 4: Execution Speed & SLA -->
+        <div class="opp-card opp-sla">
+          <div class="opp-card-top">
+            <span class="opp-icon">⏱️</span>
+            <span class="opp-badge status-sla-pill">CITIZEN CHARTER SLA</span>
+          </div>
+          <div class="opp-val" id="metricLatency">-- ms</div>
+          <div class="opp-lbl">Multi-Agent Swarm Latency</div>
+          <div class="opp-sub">Statutory 30-Day Resolution</div>
+          <div class="opp-foot">Zero Cloud API Vulnerability</div>
+        </div>
       </div>
     </section>
 
@@ -52,9 +118,9 @@
       <div class="section-title-wrap">
         <div>
           <h2>1. Select Citizen Persona <span class="sub-label">(1-Click Live Test for Hackathon Judges)</span></h2>
-          <span class="hint">Click any persona or customize real-time parameters:</span>
+          <span class="hint">Click any verified Indian persona or launch the 7-step simulator:</span>
         </div>
-        <button id="openCustomizerBtn" class="customizer-btn">⚙️ Custom Citizen Simulator</button>
+        <button id="openCustomizerBtn" class="customizer-btn">⚙️ Custom Citizen Simulator (7-Step Flow)</button>
       </div>
 
       <div class="persona-grid" id="personaGrid">
@@ -95,7 +161,7 @@
               <span class="tag alert-tag">🚨 Pension Delayed 114 Days</span>
               <span class="tag">BPL Kutcha House</span>
             </div>
-            <p class="persona-desc">Triggers autonomous CPGRAMS administrative appeal citing Citizen Charter SLA.</p>
+            <p class="persona-desc">Triggers autonomous CPGRAMS administrative appeal citing Citizen Charter 30-day statutory SLA.</p>
           </div>
         </div>
 
@@ -118,7 +184,7 @@
       <div class="custom-query-box">
         <div class="custom-input-wrap">
           <span class="input-icon">💬</span>
-          <input type="text" id="customQueryInput" placeholder="Or enter citizen description in Hindi/English (e.g. 'Main Lucknow me chai ki dukan chalata hoon, 1 lakh aamdani hai...')" />
+          <input type="text" id="customQueryInput" placeholder="Or enter citizen description in Hindi/English (e.g. 'Main Gorakhpur me chhota kisan hoon, 1.2 acre zameen hai...')" />
           <button id="voiceBtn" class="voice-btn" title="Speak in Hindi/English">🎙️</button>
         </div>
         <div class="action-btn-group">
@@ -127,88 +193,98 @@
             <option value="English">English</option>
           </select>
           <button id="launchBtn" class="launch-btn">
-            <span class="btn-text">Execute Multi-Agent Swarm</span>
+            <span class="btn-text">Execute 8-Agent Swarm</span>
             <span class="btn-icon">⚡</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Real-time Agent Execution Visualizer -->
+    <!-- Real-time 8-Agent Cognitive Visualizer -->
     <section class="agent-trace-section" id="traceSection">
       <div class="section-title-wrap">
-        <h2>2. Live Multi-Agent Cognitive Telemetry</h2>
+        <div>
+          <h2>2. Live 8-Agent Cognitive Telemetry</h2>
+          <span class="hint">Click any agent below to inspect live execution telemetry and thought traces:</span>
+        </div>
         <div class="trace-meta">
           <span id="runtimeBadge" class="runtime-badge">Runtime: -- ms</span>
-          <span id="agentsCountBadge" class="runtime-badge badge-blue">5 Specialized Agents Active</span>
+          <span id="agentsCountBadge" class="runtime-badge badge-blue">8 Specialized Agents Coordinated</span>
         </div>
       </div>
 
       <div class="agent-pipeline" id="agentPipeline">
-        <div class="pipeline-step" id="step-1">
+        <div class="pipeline-step" id="step-1" data-step="1">
           <div class="step-num">1</div>
           <div class="step-body">
-            <div class="step-title">Profile & Doc Intelligence Agent</div>
+            <div class="step-title">Intake & NLP Parser Agent</div>
             <div class="step-desc">Awaiting trigger...</div>
           </div>
           <div class="step-status">⏳</div>
         </div>
 
-        <div class="pipeline-step" id="step-2">
+        <div class="pipeline-step" id="step-2" data-step="2">
           <div class="step-num">2</div>
           <div class="step-body">
-            <div class="step-title">Bharat Schemes Reasoning Engine</div>
+            <div class="step-title">Profile Verification Agent</div>
             <div class="step-desc">Awaiting trigger...</div>
           </div>
           <div class="step-status">⏳</div>
         </div>
 
-        <div class="pipeline-step" id="step-3">
+        <div class="pipeline-step" id="step-3" data-step="3">
           <div class="step-num">3</div>
           <div class="step-body">
-            <div class="step-title">Document Gap & Compliance Agent</div>
+            <div class="step-title">Scheme Discovery Agent</div>
             <div class="step-desc">Awaiting trigger...</div>
           </div>
           <div class="step-status">⏳</div>
         </div>
 
-        <div class="pipeline-step" id="step-4">
+        <div class="pipeline-step" id="step-4" data-step="4">
           <div class="step-num">4</div>
           <div class="step-body">
-            <div class="step-title">Autonomous Form & PDF Packager</div>
+            <div class="step-title">Eligibility Rules Engine</div>
             <div class="step-desc">Awaiting trigger...</div>
           </div>
           <div class="step-status">⏳</div>
         </div>
 
-        <div class="pipeline-step" id="step-5">
+        <div class="pipeline-step" id="step-5" data-step="5">
           <div class="step-num">5</div>
           <div class="step-body">
-            <div class="step-title">Grievance & Legal Appeals Agent</div>
+            <div class="step-title">Document Inspector Agent</div>
             <div class="step-desc">Awaiting trigger...</div>
           </div>
           <div class="step-status">⏳</div>
         </div>
-      </div>
-    </section>
 
-    <!-- Key Metrics Ribbon -->
-    <section class="metrics-ribbon" id="metricsRibbon">
-      <div class="metric-card">
-        <div class="metric-val text-green" id="metricSchemes">--</div>
-        <div class="metric-lbl">Qualified Welfare Schemes</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val text-saffron" id="metricBenefits">₹0</div>
-        <div class="metric-lbl">Direct Annual Financial Benefit</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val text-blue" id="metricReadiness">0%</div>
-        <div class="metric-lbl">Document Readiness Score</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-val text-purple" id="metricSpeed">-- ms</div>
-        <div class="metric-lbl">Sandbox Execution Speed</div>
+        <div class="pipeline-step" id="step-6" data-step="6">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-title">Action Planner Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-7" data-step="7">
+          <div class="step-num">7</div>
+          <div class="step-body">
+            <div class="step-title">Application Packaging Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
+
+        <div class="pipeline-step" id="step-8" data-step="8">
+          <div class="step-num">8</div>
+          <div class="step-body">
+            <div class="step-title">Grievance Assistant Agent</div>
+            <div class="step-desc">Awaiting trigger...</div>
+          </div>
+          <div class="step-status">⏳</div>
+        </div>
       </div>
     </section>
 
@@ -217,7 +293,10 @@
       <div class="summary-header">
         <div class="summary-title-wrap">
           <span class="summary-icon">🗣️</span>
-          <h3>Citizen Audio & Bilingual Entitlement Briefing</h3>
+          <div>
+            <h3>Citizen Audio & Bilingual Entitlement Briefing</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">Synthesized natural Hindi & English audio delivery for rural and semi-urban citizens.</p>
+          </div>
         </div>
         <div class="audio-controls">
           <button id="speakBtn" class="speak-btn">🔊 Listen in Hindi / English</button>
@@ -230,11 +309,11 @@
 
     <!-- Results Section: Schemes, Documents, and Dossier Action -->
     <section class="results-section" id="resultsSection">
-      <!-- Left Column: Qualified Schemes -->
+      <!-- Left Column: Qualified Schemes Portfolio -->
       <div class="results-left">
         <div class="section-title-wrap">
           <div>
-            <h2>3. Certified Welfare Entitlements</h2>
+            <h2>3. Certified Welfare Entitlements Portfolio</h2>
             <span class="sub-label" id="schemesFoundLabel">Showing matching schemes</span>
           </div>
           <div class="category-filters" id="categoryFilters">
@@ -244,10 +323,26 @@
             <button class="filter-chip" data-cat="Housing & Infrastructure">🏠 Housing</button>
             <button class="filter-chip" data-cat="Financial Inclusion">🛒 MSME</button>
             <button class="filter-chip" data-cat="Social Security">👵 Social</button>
+            <button class="filter-chip" data-cat="Education">🎓 Education</button>
           </div>
         </div>
+
         <div class="schemes-list" id="schemesList">
           <!-- Dynamic Scheme Cards injected here -->
+        </div>
+
+        <!-- Ineligible Schemes Accordion -->
+        <div class="ineligible-accordion" id="ineligibleSection">
+          <div class="accordion-head" id="toggleIneligibleBtn">
+            <span class="accordion-title">
+              <span class="ineligible-icon">ℹ️</span>
+              <span>Transparent Audit of Non-Qualified Programs (<span id="ineligibleCount">0</span>)</span>
+            </span>
+            <span class="accordion-arrow" id="ineligibleArrow">▼</span>
+          </div>
+          <div class="accordion-body" id="ineligibleList" style="display: none;">
+            <!-- Injected via JavaScript -->
+          </div>
         </div>
       </div>
 
@@ -259,20 +354,34 @@
             <span class="dossier-icon">📑</span>
             <div>
               <h4>Official Application Dossier</h4>
-              <p>Cryptographically Certified PDF Form</p>
+              <p>AI-Assisted Draft for CSC/Nodal Submission</p>
             </div>
           </div>
-          <p class="dossier-desc">Includes unified application fields, Aadhaar/demographic declarations, scheme checklists, and verified barcode seals.</p>
+          <div class="dossier-meta-tags">
+            <span class="pill-tag">DPDP Act 2023 Compliant</span>
+            <span class="pill-tag">Masked Aadhaar: XXXX-XXXX-4812</span>
+            <span class="pill-tag">Barcoded Seal</span>
+          </div>
+          <p class="dossier-desc">Includes unified demographic profile, statutory declarations, scheme eligibility matrix, and verified barcode seals.</p>
           <button id="downloadPdfBtn" class="download-pdf-btn" disabled>
-            <span>📥 Download Application PDF</span>
+            <span>📥 Download Application PDF Draft</span>
           </button>
         </div>
 
-        <!-- Document Gap Audit -->
-        <div class="doc-audit-card">
+        <!-- Document Gap Audit (Document Inspector) -->
+        <div class="doc-audit-card" id="docAuditSection">
           <div class="doc-audit-head">
-            <h4>📑 Document Compliance Audit</h4>
+            <div>
+              <h4>📑 Document Inspector & Gap Audit</h4>
+              <span class="sub-label">Held vs Mandatory Scheme Requirements</span>
+            </div>
             <button id="digilockerFetchBtn" class="digilocker-btn" title="Simulate National DigiLocker Sync">🔗 Fetch via DigiLocker</button>
+          </div>
+          <div class="doc-progress-wrap">
+            <div class="progress-bar-bg">
+              <div class="progress-bar-fill" id="docProgressBar" style="width: 0%;"></div>
+            </div>
+            <div class="progress-text" id="docProgressText">Readiness: 0%</div>
           </div>
           <div id="docAuditList" class="doc-audit-list">
             <!-- Dynamic Document rows -->
@@ -285,8 +394,11 @@
             <span class="alert-icon">⚖️</span>
             <div>
               <h4 id="grievanceTitle">Statutory CPGRAMS Appeal</h4>
-              <p id="grievanceSub">Citizen Charter Infraction Detected</p>
+              <p id="grievanceSub">Citizen Charter 30-Day SLA Infraction Detected</p>
             </div>
+          </div>
+          <div class="grievance-sla-badge">
+            <span>Citizen Charter SLA: 30 Days Statutory Resolution</span>
           </div>
           <div class="grievance-content" id="grievanceText"></div>
           <div class="grievance-foot">
@@ -294,21 +406,97 @@
             <a href="https://pgportal.gov.in" target="_blank" class="portal-link">Open CPGRAMS Portal ↗</a>
           </div>
         </div>
+
+        <!-- Quick Grievance Drafter Trigger (6 Verified Issue Types) -->
+        <div class="quick-grievance-box">
+          <div class="quick-g-head">
+            <span class="icon">⚖️</span>
+            <strong>Report Civic / Welfare Delay or Denial</strong>
+          </div>
+          <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">Facing pension delay, ration cutoff, or DBT failure? Jan-Sahayak drafts a formal petition under statutory Citizen Charter SLAs:</p>
+          <div class="grievance-type-selector">
+            <select id="quickGrievanceSelect" class="form-input" style="font-size:12px; padding:6px 10px;">
+              <option value="pension_delayed">1. Pension Delayed (Indira Gandhi / State Pension)</option>
+              <option value="ration_issue">2. Ration Denial / NFSA Cutoff</option>
+              <option value="dbt_not_received">3. DBT Not Received (PM-Kisan / Scholarship)</option>
+              <option value="application_rejected">4. Application Rejected Arbitrarily</option>
+              <option value="subsidy_not_received">5. Housing / Mudra Subsidy Not Credited</option>
+              <option value="service_delay">6. Service Delay Beyond Citizen Charter SLA</option>
+            </select>
+            <button id="quickGrievanceBtn" class="action-btn-small" style="margin-top:6px; width:100%;">⚖️ Draft Statutory Petition</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Structured Action Plan Section: "YOUR NEXT 4 STEPS" -->
+    <section class="action-plan-section" id="actionPlanSection">
+      <div class="section-title-wrap">
+        <div>
+          <h2>4. Structured Action Plan <span class="sub-label">("YOUR NEXT 4 STEPS")</span></h2>
+          <span class="hint">Clear, sequential execution roadmap for unlocking eligible entitlements:</span>
+        </div>
+        <span class="badge badge-accent">Autonomous Delivery Roadmap</span>
+      </div>
+
+      <div class="action-plans-container" id="actionPlansContainer">
+        <!-- Injected via JavaScript from active action plans -->
+      </div>
+    </section>
+
+    <!-- Transparency & How Jan-Sahayak Works Section -->
+    <section class="transparency-section">
+      <div class="section-title-wrap">
+        <h2>5. GovTech Transparency & Trust Architecture</h2>
+        <span class="hint">Built on verified administrative principles and statutory accountability:</span>
+      </div>
+
+      <div class="transparency-grid">
+        <div class="trust-card">
+          <div class="trust-icon">📐</div>
+          <h4>Deterministic Rules Engine</h4>
+          <p>Zero hallucination. Scheme eligibility is audited against official gazette thresholds (income caps, landholding limits, age brackets, and social classifications).</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">🛡️</div>
+          <h4>Minimum Necessary Data & DPDP Act</h4>
+          <p>Follows the Digital Personal Data Protection Act 2023. Real Aadhaar numbers and bank details are never stored or requested; demographic masking (XXXX-XXXX-4812) is applied.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">🏛️</div>
+          <h4>Official Government Source Links</h4>
+          <p>Every scheme recommendation includes direct links to official .gov.in departmental portals for verification and final nodal submission.</p>
+        </div>
+
+        <div class="trust-card">
+          <div class="trust-icon">⚖️</div>
+          <h4>Citizen Charter 30-Day SLAs</h4>
+          <p>All grievance petitions cite verified Citizen Charter 30-day resolution standards and State Public Service Guarantee Acts for enforceable public accountability.</p>
+        </div>
+      </div>
+
+      <!-- Statutory Government Disclaimer -->
+      <div class="statutory-disclaimer">
+        <div class="disclaimer-title">⚖️ Statutory Governance Notice:</div>
+        <p>Jan-Sahayak AI is an autonomous civic facilitation system. Application dossiers generated are pre-filled official drafts intended for citizen submission through official Common Service Centres (CSC) or state/central government portals. Final scheme sanctions, beneficiary enrolments, and DBT disbursements are strictly subject to statutory verification by the respective competent nodal authorities.</p>
       </div>
     </section>
   </main>
 
+  <!-- App Footer -->
   <footer class="app-footer">
     <div class="footer-container">
       <div>
-        <strong>Jan-Sahayak AI (जन-सहायक)</strong> • Built with ❤️ for Bharat by <strong>Team CodeNova</strong> (Harsh Deep Chak & Pallak Devi)
+        <strong>Jan-Sahayak AI (जन-सहायक AI)</strong> • Built with ❤️ for Bharat by <strong>Team Bits and Bytes</strong> (Harsh Deep Chak & Pallak Devi)
       </div>
       <div class="footer-links">
         <a href="/static/pitch.html" target="_blank">📊 10-Slide Pitch Deck</a>
         <span>•</span>
-        <a href="https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon" target="_blank">GitHub Repository</a>
+        <a href="/docs" target="_blank">⚡ OpenAPI Swagger Specs</a>
         <span>•</span>
-        <a href="/docs" target="_blank">OpenAPI Swagger</a>
+        <a href="https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon" target="_blank">GitHub Repository</a>
       </div>
     </div>
   </footer>
@@ -337,82 +525,231 @@
     </div>
   </div>
 
-  <!-- Citizen Profile Customizer Modal -->
+  <!-- Redesigned 7-Step Progressive Custom Citizen Simulator Modal -->
   <div class="modal-backdrop" id="profileCustomizerModal" style="display: none;">
-    <div class="modal-card">
+    <div class="modal-card modal-wizard-card">
       <div class="modal-header">
         <div class="modal-title-wrap">
           <span class="modal-icon">⚙️</span>
-          <h3>Dynamic Citizen Simulator (Live Agent Recalculation)</h3>
+          <div>
+            <h3>Custom Citizen Simulator (7-Step Progressive Flow)</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">Minimum Necessary Data Standard • Progressive Disclosure</p>
+          </div>
         </div>
         <button class="modal-close-btn" id="customizerCloseBtn">✕</button>
       </div>
+      
+      <!-- Wizard Step Indicators -->
+      <div class="wizard-steps-bar">
+        <div class="w-step active" data-wstep="1">1. Identity</div>
+        <div class="w-step" data-wstep="2">2. Demographics</div>
+        <div class="w-step" data-wstep="3">3. Livelihood</div>
+        <div class="w-step" data-wstep="4">4. Economics</div>
+        <div class="w-step" data-wstep="5">5. Family</div>
+        <div class="w-step" data-wstep="6">6. Documents</div>
+        <div class="w-step" data-wstep="7">7. Grievance</div>
+      </div>
+
       <div class="modal-body">
-        <p style="font-size:13px; color:var(--text-muted); margin-bottom:14px;">Adjust parameters below and click Execute to observe deterministic multi-agent reasoning in real time:</p>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Citizen Full Name:</label>
-            <input type="text" id="custName" value="Shyam Sundar Sharma" class="form-input" />
-          </div>
-          <div class="form-group">
-            <label>Age & Gender:</label>
-            <div style="display:flex; gap:8px;">
-              <input type="number" id="custAge" value="45" style="width:70px;" class="form-input" />
-              <select id="custGender" class="form-input" style="flex:1;">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
+        <!-- Step 1: Identity & Location -->
+        <div class="wizard-panel active" id="wPanel-1">
+          <h4 class="w-panel-title">Step 1: Citizen Identity & Location</h4>
+          <p class="w-panel-desc">Basic identification for state and local jurisdiction filtering:</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Citizen Full Name:</label>
+              <input type="text" id="custName" value="Shyam Sundar Sharma" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>State of Domicile:</label>
+              <select id="custState" class="form-input">
+                <option value="Uttar Pradesh" selected>Uttar Pradesh</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Delhi">Delhi</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Rajasthan">Rajasthan</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>District:</label>
+              <input type="text" id="custDistrict" value="Gorakhpur" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Area Type:</label>
+              <select id="custUrbanRural" class="form-input">
+                <option value="Rural" selected>Rural (Gram Panchayat)</option>
+                <option value="Urban">Urban (Nagar Nigam / Municipality)</option>
               </select>
             </div>
           </div>
-          <div class="form-group">
-            <label>State & Domicile:</label>
-            <select id="custState" class="form-input">
-              <option value="Uttar Pradesh">Uttar Pradesh</option>
-              <option value="Madhya Pradesh">Madhya Pradesh</option>
-              <option value="Delhi">Delhi</option>
-              <option value="Bihar">Bihar</option>
-              <option value="Maharashtra">Maharashtra</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Primary Occupation:</label>
-            <select id="custOccupation" class="form-input">
-              <option value="Farmer">Farmer (Agriculturalist)</option>
-              <option value="Street Vendor">Street Vendor (Hawker/Thelawala)</option>
-              <option value="Artisan">Artisan / Traditional Craftsman</option>
-              <option value="Unorganized Laborer">Daily Wage Laborer</option>
-              <option value="Unemployed">Low Income / General</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Annual Income (₹): <strong id="custIncomeVal">₹ 1,20,000</strong></label>
-            <input type="range" id="custIncome" min="30000" max="600000" step="10000" value="120000" class="form-range" />
-          </div>
-          <div class="form-group">
-            <label>Cultivable Land (Acres): <strong id="custLandVal">1.5 Acres</strong></label>
-            <input type="range" id="custLand" min="0" max="8" step="0.1" value="1.5" class="form-range" />
-          </div>
-          <div class="form-group">
-            <label>Social Category / Caste:</label>
-            <select id="custCaste" class="form-input">
-              <option value="OBC">OBC (Other Backward Class)</option>
-              <option value="SC">SC (Scheduled Caste)</option>
-              <option value="ST">ST (Scheduled Tribe)</option>
-              <option value="General">General / EWS</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Daughters Count (under 10y):</label>
-            <select id="custDaughters" class="form-input">
-              <option value="0">0 Daughters</option>
-              <option value="1">1 Daughter</option>
-              <option value="2" selected>2 Daughters</option>
-            </select>
+        </div>
+
+        <!-- Step 2: Demographics -->
+        <div class="wizard-panel" id="wPanel-2" style="display:none;">
+          <h4 class="w-panel-title">Step 2: Demographic Parameters</h4>
+          <p class="w-panel-desc">Age, gender, and social category for affirmative action criteria:</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Age (Years):</label>
+              <input type="number" id="custAge" value="45" min="18" max="100" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Gender:</label>
+              <select id="custGender" class="form-input">
+                <option value="Male" selected>Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Social Category / Caste:</label>
+              <select id="custCaste" class="form-input">
+                <option value="General">General / EWS</option>
+                <option value="OBC" selected>OBC (Other Backward Class)</option>
+                <option value="SC">SC (Scheduled Caste)</option>
+                <option value="ST">ST (Scheduled Tribe)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Disability / Divyangjan Status:</label>
+              <select id="custDisability" class="form-input">
+                <option value="No" selected>No Disability</option>
+                <option value="Yes">Yes (Disability Certificate Available)</option>
+              </select>
+            </div>
           </div>
         </div>
-        <div style="margin-top:20px; display:flex; justify-content:flex-end; gap:10px;">
+
+        <!-- Step 3: Occupation & Livelihood -->
+        <div class="wizard-panel" id="wPanel-3" style="display:none;">
+          <h4 class="w-panel-title">Step 3: Occupation & Livelihood</h4>
+          <p class="w-panel-desc">Primary livelihood to evaluate scheme-specific eligibility (PM-Kisan, PM SVANidhi, PM Vishwakarma):</p>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Primary Occupation:</label>
+              <select id="custOccupation" class="form-input">
+                <option value="Farmer" selected>Farmer (Agriculturalist)</option>
+                <option value="Street Vendor">Street Vendor / Urban Hawker</option>
+                <option value="Artisan">Artisan / Traditional Craftsman (Vishwakarma)</option>
+                <option value="Unorganized Laborer">Daily Wage / Construction Laborer</option>
+                <option value="Domestic Worker">Domestic Worker / Helper</option>
+                <option value="Unemployed">Low Income / General Resident</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Economic Parameters -->
+        <div class="wizard-panel" id="wPanel-4" style="display:none;">
+          <h4 class="w-panel-title">Step 4: Economic Parameters</h4>
+          <p class="w-panel-desc">Income and landholding parameters (Minimum Necessary Data standard):</p>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Annual Family Income: <strong id="custIncomeVal" style="color:var(--saffron);">₹ 1,20,000</strong></label>
+              <input type="range" id="custIncome" min="20000" max="800000" step="10000" value="120000" class="form-range" />
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px;">
+                <span>₹20K (Destitute/BPL)</span>
+                <span>₹2.5L (EWS Cap)</span>
+                <span>₹8L (General Cap)</span>
+              </div>
+            </div>
+
+            <div class="form-group full-width" id="landGroup">
+              <label>Cultivable Landholding (Acres): <strong id="custLandVal" style="color:var(--primary-navy);">1.2 Acres</strong></label>
+              <input type="range" id="custLand" min="0" max="8" step="0.1" value="1.2" class="form-range" />
+              <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted); margin-top:4px;">
+                <span>0 (Landless)</span>
+                <span>2.0 Acres (Marginal)</span>
+                <span>5.0 Acres (Small)</span>
+                <span>8.0+ Acres</span>
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <label>Housing Status:</label>
+              <select id="custHousing" class="form-input">
+                <option value="Kutcha/Semi-pucca" selected>Kutcha or Dilapidated House (PMAY Target)</option>
+                <option value="Pucca">Pucca Concrete House</option>
+                <option value="Homeless">Homeless / Rented Accommodation</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Household / Family -->
+        <div class="wizard-panel" id="wPanel-5" style="display:none;">
+          <h4 class="w-panel-title">Step 5: Household & Girl Child Welfare</h4>
+          <p class="w-panel-desc">Information required solely for targeted programs like Sukanya Samriddhi & RTE 25% quota:</p>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Number of Daughters (Age 0 - 10y):</label>
+              <select id="custDaughters" class="form-input">
+                <option value="0">0 Daughters</option>
+                <option value="1">1 Daughter</option>
+                <option value="2" selected>2 Daughters</option>
+                <option value="3">3 Daughters</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Senior Citizens in Household (Age 60+):</label>
+              <select id="custSeniors" class="form-input">
+                <option value="0" selected>0</option>
+                <option value="1">1 Senior Citizen</option>
+                <option value="2">2 Senior Citizens</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 6: Verified Documents in Hand -->
+        <div class="wizard-panel" id="wPanel-6" style="display:none;">
+          <h4 class="w-panel-title">Step 6: Verified Documents in Hand</h4>
+          <p class="w-panel-desc">Check the documents currently possessed by the citizen for instant gap analysis:</p>
+          <div class="docs-checklist-grid" id="docsChecklist">
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Aadhaar Card" checked> Aadhaar Card (e-KYC Attested)</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Bank Account details (Aadhaar linked NPCI seeded)" checked> Bank Passbook (NPCI Seeded)</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Ration Card (NFSA or State BPL Card)"> Ration Card (NFSA / BPL)</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Land Ownership Records (Khasra/Khatauni/ROR)" checked> Land Records (Khatauni / Khasra)</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="UP Domicile Certificate (Niwas Praman Patra)"> Domicile Certificate (Niwas)</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Caste Certificate (OBC/SC/ST)"> Caste Certificate</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Vending Certificate / Urban Local Body ID Card"> Street Vendor / Town Vending Card</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Artisan Certificate / Trade Recommendation"> Artisan / Traditional Craftsman Proof</label>
+            <label class="doc-checkbox-lbl"><input type="checkbox" value="Husband's Death Certificate"> Husband's Death Certificate (if widow)</label>
+          </div>
+        </div>
+
+        <!-- Step 7: Civic Grievance Case -->
+        <div class="wizard-panel" id="wPanel-7" style="display:none;">
+          <h4 class="w-panel-title">Step 7: Civic Grievance & Administrative Delays (Optional)</h4>
+          <p class="w-panel-desc">If citizen is suffering from government service delay, Jan-Sahayak drafts an administrative appeal:</p>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Select Service Issue Type:</label>
+              <select id="custGrievanceType" class="form-input">
+                <option value="none" selected>No Current Grievance (Only Scheme Discovery)</option>
+                <option value="pension_delayed">Pension Delayed Beyond Statutory 30 Days (Indira Gandhi / State)</option>
+                <option value="ration_issue">Ration Quota Arbitrarily Withheld / NFSA Card Issue</option>
+                <option value="dbt_not_received">PM-Kisan / DBT Installment Not Received in Bank</option>
+                <option value="application_rejected">Application Rejected Without Written Reason</option>
+                <option value="subsidy_not_received">Housing / Credit Subsidy Disbursal Delayed</option>
+                <option value="service_delay">Public Service Guarantee Act SLA Exceeded</option>
+              </select>
+            </div>
+            <div class="form-group full-width" id="grievanceDaysGroup" style="display:none;">
+              <label>Days of Delay Observed:</label>
+              <input type="number" id="custGrievanceDays" value="90" min="30" max="730" class="form-input" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Wizard Navigation Footer -->
+        <div class="wizard-footer">
+          <button class="nav-btn" id="wPrevBtn" style="display:none;">◀ Previous</button>
+          <div style="flex:1;"></div>
           <button class="nav-btn" id="cancelCustomizerBtn">Cancel</button>
-          <button class="launch-btn" id="applyCustomizerBtn">⚡ Re-Audit with Custom Profile</button>
+          <button class="launch-btn" id="wNextBtn">Next Step ▶</button>
+          <button class="launch-btn" id="applyCustomizerBtn" style="display:none;">⚡ Audit Profile with 8-Agent Swarm</button>
         </div>
       </div>
     </div>

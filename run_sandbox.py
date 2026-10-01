@@ -51,8 +51,8 @@ def main():
     persona_id = "rameshwar_farmer"
     if "Sunita" in selected_persona or "Street Vendor" in selected_persona:
         persona_id = "sunita_street_vendor"
-    elif "Kamala" in selected_persona or "Widow" in selected_persona:
-        persona_id = "kamala_widow"
+    elif "Kavita" in selected_persona or "Kamala" in selected_persona or "Widow" in selected_persona:
+        persona_id = "kavita_widow"
     elif "Rafiq" in selected_persona or "Artisan" in selected_persona:
         persona_id = "rafiq_artisan"
 
@@ -74,15 +74,16 @@ def main():
     is_hindi = "Hindi" in lang or "हिंदी" in lang
 
     top_schemes_md = ""
-    for s in eval_res.get("qualified_schemes", [])[:5]:
+    schemes_to_show = eval_res.get("eligible_schemes", []) or eval_res.get("qualified_schemes", [])
+    for s in schemes_to_show[:5]:
         top_schemes_md += f"""
 ### 🏛️ {s['scheme_name']} ({s.get('hindi_name', '')})
 - **Category & Ministry:** {s.get('category')} | {s.get('ministry')}
 - **Direct Benefit:** **{s['benefit_summary'].get('financial', 'Government Subsidy / Coverage')}**
-- **Match Score:** `{s['match_score']}%`
-- **Agent Verification Reasoning:** {s['reasoning_trace'][0] if s['reasoning_trace'] else 'Criteria satisfied.'}
+- **Match Score:** `{s.get('match_score', 100)}%`
+- **Agent Verification Reasoning:** {s['why_qualify'][0] if s.get('why_qualify') else (s['reasoning_trace'][0] if s.get('reasoning_trace') else 'Criteria satisfied.')}
 - **Required Documents:** {', '.join(s.get('mandatory_documents', [])[:3])}
-- **Official Portal:** [{s.get('nodal_portal')}]({s.get('nodal_portal')})
+- **Official Portal:** [{s.get('official_url', s.get('nodal_portal', ''))}]({s.get('official_url', s.get('nodal_portal', ''))})
 """
 
     agent_trace_md = ""
@@ -125,10 +126,11 @@ def main():
 ---
 
 ## 🎯 Entitlement Summary: Qualified Government Schemes
-- **Total Schemes Evaluated:** `{eval_res['total_schemes_evaluated']}`
-- **Schemes Qualified:** `{eval_res['qualified_count']}`
-- **Total Estimated Annual Direct Benefit:** **₹{eval_res['total_estimated_annual_benefit_inr']:,.0f} / year**
-- **Document Readiness Score:** `{gap_res['overall_document_readiness_score']}%`
+- **Total Configured Schemes:** `{eval_res.get('total_configured_schemes', 12)}`
+- **Schemes Qualified (Eligible):** `{eval_res.get('eligible_count', eval_res.get('qualified_count', 0))}`
+- **Potentially Eligible Schemes:** `{eval_res.get('potential_count', 0)}`
+- **Total Estimated Annual Direct Benefit:** **₹{eval_res.get('total_estimated_annual_benefit_inr', 0):,.0f} / year**
+- **Document Readiness Score:** `{gap_res.get('overall_document_readiness_score', 0)}%`
 
 {top_schemes_md}
 

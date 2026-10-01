@@ -1,6 +1,6 @@
 """
-Jan-Sahayak AI - Citizen Profile & Document Intelligence Agent
-Extracts demographic, socio-economic, and documentation attributes from raw text, voice, or structured inputs.
+Jan-Sahayak AI - Citizen Profile & Progressive Disclosure Agent
+Extracts demographic, socio-economic, and documentation attributes based on the Minimum Necessary Data principle.
 """
 
 from typing import Dict, Any, List, Optional
@@ -8,111 +8,73 @@ import re
 
 DEMO_PERSONAS = {
     "rameshwar_farmer": {
-        "name": "Rameshwar Prasad Yadav",
+        "name": "Ramesh",
         "age": 42,
         "gender": "Male",
         "state": "Uttar Pradesh",
         "district": "Gorakhpur",
-        "urban_rural": "Rural",
+        "rural_urban": "Rural",
         "occupation": "Farmer",
         "annual_income": 140000,
-        "caste": "OBC",
+        "social_category": "OBC",
         "landholding_acres": 1.2,
-        "marital_status": "Married",
-        "daughters_count": 2,
-        "daughter_ages": [6, 9],
-        "housing_status": "Semi-pucca",
+        "special_conditions": [],
+        "has_young_children": True,
+        "housing_condition": "Semi-pucca",
         "existing_documents": [
             "Aadhaar Card",
-            "Bank Passbook (SBI Gorakhpur)",
-            "Land Khasra/Khatauni Copy",
-            "Ration Card (PHH)"
+            "Bank Account details (Aadhaar linked NPCI seeded)",
+            "Active Mobile Number"
         ],
-        "specific_need": "Financial support for agriculture, daughter education, and health security",
         "grievance_case": None
     },
     "sunita_street_vendor": {
-        "name": "Sunita Devi",
+        "name": "Sunita",
         "age": 34,
         "gender": "Female",
         "state": "Delhi",
         "district": "Central Delhi",
-        "urban_rural": "Urban",
+        "rural_urban": "Urban",
         "occupation": "Street Vendor",
         "annual_income": 95000,
-        "caste": "SC",
+        "social_category": "SC",
         "landholding_acres": 0.0,
-        "marital_status": "Married",
-        "daughters_count": 1,
-        "daughter_ages": [5],
-        "housing_status": "Rented single room",
+        "special_conditions": [],
+        "has_young_children": True,
+        "housing_condition": "Rented single room",
         "existing_documents": [
             "Aadhaar Card",
-            "Voter ID Card",
-            "Bank Account (PNB Chandni Chowk)",
-            "Delhi Town Vending Committee (TVC) Receipt"
+            "Voter ID / Identity Proof",
+            "Active Mobile Number"
         ],
-        "specific_need": "Working capital loan for fruit cart and free private school admission for daughter under RTE",
         "grievance_case": None
     },
     "kavita_widow": {
-        "name": "Kavita Bai",
+        "name": "Kavita",
         "age": 62,
         "gender": "Female",
         "state": "Madhya Pradesh",
         "district": "Jabalpur",
-        "urban_rural": "Rural",
-        "occupation": "Unorganized Agricultural Laborer",
+        "rural_urban": "Rural",
+        "occupation": "Agricultural Laborer",
         "annual_income": 45000,
-        "caste": "SC",
+        "social_category": "SC",
         "landholding_acres": 0.0,
-        "marital_status": "Widow",
-        "daughters_count": 0,
-        "daughter_ages": [],
-        "housing_status": "Kutcha mud house (damaged roof)",
+        "special_conditions": ["Widow"],
+        "has_young_children": False,
+        "housing_condition": "Kutcha mud house (damaged roof)",
         "existing_documents": [
             "Aadhaar Card",
             "Husband's Death Certificate",
-            "BPL Ration Card",
-            "Post Office Savings Passbook"
+            "Ration Card (NFSA or State BPL Card)"
         ],
-        "specific_need": "Widow monthly pension, pucca housing grant, and free medical insurance card",
         "grievance_case": {
-            "type": "Pension Approval Delayed",
+            "issue_type": "Pension Delayed",
+            "scheme_name": "Indira Gandhi National Widow Pension Scheme (IGNWPS)",
             "portal": "Samagra / NSAP Jabalpur",
             "application_no": "MP-NSAP-2024-88912",
             "days_pending": 114,
-            "grievance_detail": "Submitted widow pension file 4 months ago at Tehsil office, no DBT received, officer asking for redundant affidavit."
-        }
-    },
-    "kamala_widow": {
-        "name": "Kavita Bai",
-        "age": 62,
-        "gender": "Female",
-        "state": "Madhya Pradesh",
-        "district": "Jabalpur",
-        "urban_rural": "Rural",
-        "occupation": "Unorganized Agricultural Laborer",
-        "annual_income": 45000,
-        "caste": "SC",
-        "landholding_acres": 0.0,
-        "marital_status": "Widow",
-        "daughters_count": 0,
-        "daughter_ages": [],
-        "housing_status": "Kutcha mud house (damaged roof)",
-        "existing_documents": [
-            "Aadhaar Card",
-            "Husband's Death Certificate",
-            "BPL Ration Card",
-            "Post Office Savings Passbook"
-        ],
-        "specific_need": "Widow monthly pension, pucca housing grant, and free medical insurance card",
-        "grievance_case": {
-            "type": "Pension Approval Delayed",
-            "portal": "Samagra / NSAP Jabalpur",
-            "application_no": "MP-NSAP-2024-88912",
-            "days_pending": 114,
-            "grievance_detail": "Submitted widow pension file 4 months ago at Tehsil office, no DBT received, officer asking for redundant affidavit."
+            "grievance_detail": "Submitted widow pension application 4 months ago at Tehsil office with verified death certificate; no DBT received yet beyond statutory 30-day timeline."
         }
     },
     "rafiq_artisan": {
@@ -121,133 +83,133 @@ DEMO_PERSONAS = {
         "gender": "Male",
         "state": "Uttar Pradesh",
         "district": "Saharanpur",
-        "urban_rural": "Semi-Urban",
+        "rural_urban": "Urban",
         "occupation": "Artisan",
-        "trade_specialization": "Traditional Woodcarver (Carpenter/Woodwork)",
+        "artisan_trade": "Carpenter (Woodcarver)",
         "annual_income": 120000,
-        "caste": "OBC",
+        "social_category": "OBC",
         "landholding_acres": 0.0,
-        "marital_status": "Married",
-        "daughters_count": 1,
-        "daughter_ages": [8],
-        "housing_status": "Own small house",
+        "special_conditions": ["Artisan Trade"],
+        "has_young_children": True,
+        "housing_condition": "Own small dwelling",
         "existing_documents": [
             "Aadhaar Card",
-            "Bank Passbook (Bank of Baroda)",
-            "Artisan Guild Identity Slip"
+            "Mobile Number linked with Aadhaar",
+            "Self-declaration of traditional artisan trade"
         ],
-        "specific_need": "Artisan tool kit grant, 5% low-interest business loan, and daughter education scheme",
         "grievance_case": None
     }
 }
 
 
 class ProfileParserAgent:
-    """Agent responsible for digesting conversational input and synthesizing a canonical citizen profile."""
+    """Agent that handles progressive profile validation and intake."""
 
     def __init__(self):
-        self.name = "Profile & Document Intelligence Agent"
+        self.name = "Citizen Intake & Profile Validation Agent"
 
     def parse(self, raw_input: Any) -> Dict[str, Any]:
         """
-        Parses dictionary input, pre-selected persona, or raw text input into a standard citizen profile.
+        Parses structured input dictionary, predefined persona, or raw text into a canonical citizen profile.
         """
-        # 1. If raw_input references a preset persona
         if isinstance(raw_input, dict):
             persona_key = raw_input.get("persona_id") or raw_input.get("persona")
             if persona_key and persona_key in DEMO_PERSONAS:
                 profile = dict(DEMO_PERSONAS[persona_key])
-                # Overlay any specific overrides
+                # Overlay specific overrides
                 for k, v in raw_input.items():
                     if k not in ["persona_id", "persona"] and v is not None and v != "":
                         profile[k] = v
-                return profile
+                return self._normalize_profile_dict(profile)
 
-            # If it's already a full profile dict, ensure defaults
             return self._normalize_profile_dict(raw_input)
 
-        # 2. If raw string input
         if isinstance(raw_input, str):
-            # Check if mentions persona by name
             for key, p in DEMO_PERSONAS.items():
                 if key in raw_input.lower() or p["name"].lower() in raw_input.lower():
                     return dict(p)
             return self._extract_from_text(raw_input)
 
-        # Default fallback persona
         return dict(DEMO_PERSONAS["rameshwar_farmer"])
 
     def _normalize_profile_dict(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """Ensures all fields follow progressive disclosure and minimum necessary data standards."""
+        occupation = str(data.get("occupation", "General")).strip()
+
+        # Handle landholding progressively (only meaningful if agricultural)
+        landholding = float(data.get("landholding_acres", 0.0))
+        if "farmer" not in occupation.lower() and "agri" not in occupation.lower():
+            if data.get("landholding_acres") is None:
+                landholding = 0.0
+
+        # Handle special conditions list
+        specials = data.get("special_conditions", [])
+        if isinstance(specials, str):
+            specials = [specials] if specials else []
+
+        # If widow is indicated in text or special conditions
+        if str(data.get("marital_status", "")).lower() == "widow" and "Widow" not in specials:
+            specials.append("Widow")
+
         profile = {
-            "name": str(data.get("name", "Bharat Citizen")),
+            "name": str(data.get("name", "Citizen of Bharat")).strip(),
             "age": int(data.get("age", 35)),
-            "gender": str(data.get("gender", "Male")),
-            "state": str(data.get("state", "Uttar Pradesh")),
-            "district": str(data.get("district", "Varanasi")),
-            "urban_rural": str(data.get("urban_rural", "Rural")),
-            "occupation": str(data.get("occupation", "Farmer")),
+            "gender": str(data.get("gender", "All")).strip(),
+            "state": str(data.get("state", "Uttar Pradesh")).strip(),
+            "district": str(data.get("district", "Gorakhpur")).strip(),
+            "rural_urban": str(data.get("rural_urban", "Rural")).strip(),
+            "occupation": occupation,
             "annual_income": float(data.get("annual_income", 120000)),
-            "caste": str(data.get("caste", "OBC")),
-            "landholding_acres": float(data.get("landholding_acres", 1.0)),
-            "marital_status": str(data.get("marital_status", "Married")),
-            "daughters_count": int(data.get("daughters_count", 0)),
-            "daughter_ages": data.get("daughter_ages", []),
-            "housing_status": str(data.get("housing_status", "Semi-pucca")),
-            "existing_documents": data.get("existing_documents", ["Aadhaar Card", "Bank Account"]),
-            "specific_need": str(data.get("specific_need", "Welfare benefits matching and official form generation")),
+            "social_category": str(data.get("social_category", data.get("caste", "General"))).strip(),
+            "landholding_acres": landholding,
+            "artisan_trade": data.get("artisan_trade", "None"),
+            "special_conditions": specials,
+            "has_young_children": bool(data.get("has_young_children", False) or (int(data.get("daughters_count", 0)) > 0)),
+            "housing_condition": str(data.get("housing_condition", data.get("housing_status", "Normal"))).strip(),
+            "existing_documents": data.get("existing_documents", ["Aadhaar Card", "Bank Account details (Aadhaar linked NPCI seeded)"]),
             "grievance_case": data.get("grievance_case", None)
         }
         return profile
 
     def _extract_from_text(self, text: str) -> Dict[str, Any]:
-        """
-        Deterministic NLP extractor for vernacular / English queries.
-        """
-        profile = dict(DEMO_PERSONAS["rameshwar_farmer"]) # baseline template
+        """Deterministic extractor for conversational vernacular text."""
+        profile = dict(DEMO_PERSONAS["rameshwar_farmer"])
         lower = text.lower()
 
-        # Extract name if present
-        name_match = re.search(r"(?:name is|mera naam|naam)\s+([a-zA-Z\s]+?)(?:hai|\.|,|\n|$)", text, re.IGNORECASE)
+        name_match = re.search(r"(?:name is|naam hai|naam)\s+([a-zA-Z\s]+?)(?:hai|\.|,|\n|$)", text, re.IGNORECASE)
         if name_match:
             profile["name"] = name_match.group(1).strip()
 
-        # Extract Age
         age_match = re.search(r"(\d{2})\s*(?:years|saal|umar|yr|yo)", lower)
         if age_match:
             profile["age"] = int(age_match.group(1))
 
-        # Extract Gender
-        if any(w in lower for w in ["female", "aurat", "mahila", "lady", "widow", "stri"]):
+        if any(w in lower for w in ["female", "mahila", "aurat", "lady", "widow", "vidhwa"]):
             profile["gender"] = "Female"
-        elif any(w in lower for w in ["male", "purush", "aadmi", "man"]):
+            if "widow" in lower or "vidhwa" in lower:
+                profile["special_conditions"] = ["Widow"]
+        elif any(w in lower for w in ["male", "purush", "man"]):
             profile["gender"] = "Male"
 
-        # Extract Marital Status
-        if any(w in lower for w in ["widow", "vidhwa", "vidva", "husband passed"]):
-            profile["marital_status"] = "Widow"
-            profile["gender"] = "Female"
-
-        # Occupation
-        if any(w in lower for w in ["farmer", "kisan", "farming", "kheti"]):
+        if any(w in lower for w in ["farmer", "kisan", "kheti"]):
             profile["occupation"] = "Farmer"
-            profile["urban_rural"] = "Rural"
-        elif any(w in lower for w in ["vendor", "thela", "hawker", "street", "feri", "dukaan"]):
+            profile["rural_urban"] = "Rural"
+        elif any(w in lower for w in ["vendor", "thela", "hawker", "street"]):
             profile["occupation"] = "Street Vendor"
-            profile["urban_rural"] = "Urban"
+            profile["rural_urban"] = "Urban"
             profile["landholding_acres"] = 0.0
-        elif any(w in lower for w in ["artisan", "carpenter", "mistri", "lohar", "badhai", "karigar"]):
+        elif any(w in lower for w in ["artisan", "carpenter", "mistri", "badhai", "karigar"]):
             profile["occupation"] = "Artisan"
+            profile["special_conditions"] = ["Artisan Trade"]
         elif any(w in lower for w in ["labor", "majdoor", "shramik", "daily wage"]):
-            profile["occupation"] = "Daily Earner"
+            profile["occupation"] = "Daily Laborer"
 
-        # State
-        for s in ["Uttar Pradesh", "UP", "Madhya Pradesh", "MP", "Delhi", "Bihar", "Maharashtra", "Rajasthan"]:
+        for s in ["Uttar Pradesh", "Madhya Pradesh", "Delhi", "Bihar", "Maharashtra", "Rajasthan"]:
             if s.lower() in lower:
-                profile["state"] = "Uttar Pradesh" if s.upper() == "UP" else ("Madhya Pradesh" if s.upper() == "MP" else s)
+                profile["state"] = s
                 break
 
-        # Income
-        inc_match = re.search(r"(?:income|kamai|aamdani|earn).*?(\d+)\s*(?:lakh|lac|k|thousand|hazar)?", lower)
+        inc_match = re.search(r"(?:income|kamai|aamdani).*?(\d+)\s*(?:lakh|lac|k|thousand|hazar)?", lower)
         if inc_match:
             num = float(inc_match.group(1))
             if "lakh" in lower or "lac" in lower:
@@ -257,19 +219,17 @@ class ProfileParserAgent:
             else:
                 profile["annual_income"] = num if num > 1000 else num * 1000
 
-        # Daughters
-        if "daughter" in lower or "beti" in lower or "ladki" in lower:
-            profile["daughters_count"] = 1
-            profile["daughter_ages"] = [7]
+        if any(w in lower for w in ["child", "beti", "bachha", "daughter", "school"]):
+            profile["has_young_children"] = True
 
-        # Grievance detection
-        if any(w in lower for w in ["grievance", "shikayat", "pending", "atka", "pension nahi aayi", "complaint", "delayed", "bribe"]):
+        if any(w in lower for w in ["delay", "pending", "atka", "pension nahi aayi", "complaint", "grievance"]):
             profile["grievance_case"] = {
-                "type": "General Service Grievance",
+                "issue_type": "Service Delay",
+                "scheme_name": "Government Citizen Welfare Benefit",
                 "portal": "CPGRAMS / State Portal",
                 "application_no": "COMP-2026-9921",
                 "days_pending": 60,
                 "grievance_detail": text
             }
 
-        return profile
+        return self._normalize_profile_dict(profile)

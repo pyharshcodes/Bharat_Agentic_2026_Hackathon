@@ -3,9 +3,9 @@ kind: AgentManifest
 
 metadata:
   name: jan-sahayak-ai
-  displayName: "Jan-Sahayak AI (जन-सहायक) — by CodeNova"
+  displayName: "Jan-Sahayak AI (जन-सहायक) — by Bits and Bytes"
   description: "Autonomous multi-agent welfare eligibility auditor, compliance verifier, government application packager, and CPGRAMS grievance drafter for Bharat."
-  author: "Team CodeNova (Harsh Deep Chak & Pallak Devi)"
+  author: "Team Bits and Bytes (Harsh Deep Chak & Pallak Devi)"
   repository: "https://github.com/pyharshcodes/Bharat_Agentic_2026_Hackathon"
 
 runtime:
