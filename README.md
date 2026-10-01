@@ -27,30 +27,70 @@ Every year, the Government of India and State Governments allocate over **₹4 L
 ## 🏗️ 8-Agent Cognitive Swarm Architecture
 
 ```mermaid
-flowchart TD
-    Citizen([Citizen / Judge Input\nVoice, Vernacular Text, or Persona]) --> Gateway[aiKart Gateway / Web Dashboard]
-    
-    subgraph CognitiveOrchestrator [Jan-Sahayak Multi-Agent Orchestrator]
-        Gateway --> Orchestrator[Master Orchestrator Agent\nState Machine & Telemetry Logger]
-        
-        Orchestrator --> Agent1[1. Intake & NLP Parser Agent\nExtracts Minimum Necessary Data via Progressive Disclosure]
-        Orchestrator --> Agent2[2. Profile Verification Agent\nValidates Boundary Checks & DPDP Act 2023 Masking]
-        Orchestrator --> Agent3[3. Scheme Discovery Agent\nScans 12 Configured Central & State Schemes]
-        Orchestrator --> Agent4[4. Eligibility Rules Engine\nDeterministic 4-State Evaluation: Eligible, Potential, Insufficient, Ineligible]
-        Orchestrator --> Agent5[5. Document Inspector Agent\nAudits Held Docs vs Mandates & Formulates Remediation Plan]
-        Orchestrator --> Agent6[6. Action Planner Agent\nCompiles 4-Step Action Roadmaps for Top Entitlements]
-        Orchestrator --> Agent7[7. Application Packaging Agent\nMints Official Application Dossier Draft PDF via ReportLab]
-        Orchestrator --> Agent8[8. Grievance Assistant Agent\nDrafts Statutory CPGRAMS Appeals citing Citizen Charter 30-day SLAs]
+flowchart TB
+    subgraph Layer1 ["🇮🇳 CITIZEN INTAKE & VERNACULAR INTERACTION LAYER"]
+        direction LR
+        C1["🗣️ Vernacular Voice & Audio\n(Hindi / English / Web Speech)"]
+        C2["💬 Natural Situation Query\n(Unstructured Need Parsing)"]
+        C3["⚙️ 7-Step Progressive Simulator\n(Minimum Necessary Data)"]
+        C4["🌾 1-Click Verified Personas\n(Farmer, Vendor, Widow, Artisan)"]
     end
 
-    subgraph OutputLayer [Tangible Deliverables]
-        Agent4 --> LiveTrace[Deterministic Verification & Why-Qualify Audit]
-        Agent5 --> RemediationRoadmap[Missing Document Resolution Roadmap]
-        Agent6 --> ActionRoadmap[Structured 4-Step Citizen Action Plan]
-        Agent7 --> PDFDossier[Official Application Dossier Draft PDF]
-        Agent8 --> LegalPetition[Statutory CPGRAMS Petition Text]
-        Orchestrator --> SandboxJSON["/aikart/output.json (Markdown Sandbox Result)"]
+    Layer1 ==> CoreGateway["⚡ aiKart Sovereign Orchestrator & Gateway"]
+
+    subgraph Layer2 ["🧠 8-AGENT COGNITIVE REASONING PIPELINE (ZERO-EGRESS)"]
+        direction TB
+
+        subgraph PipeA ["Stage 1: Intake & Privacy Sanitization"]
+            A1["Agent 1: Intake & NLP Parser\n• Canonical 12-factor extraction\n• Progressive disclosure"]
+            A2["Agent 2: Profile Verification\n• Boundary condition checks\n• DPDP Act 2023 Masking (XXXX-4812)"]
+            A1 --> A2
+        end
+
+        subgraph PipeB ["Stage 2: Statutory Entitlement Audit"]
+            A3["Agent 3: Scheme Discovery\n• Scans 12 Central & State programs\n• Jurisdiction & category matching"]
+            A4["Agent 4: Eligibility Rules Engine\n• 4-State Deterministic Classification\n• Explicit 'Why Qualify' gazette rules"]
+            A3 --> A4
+        end
+
+        subgraph PipeC ["Stage 3: Compliance & Strategic Planning"]
+            A5["Agent 5: Document Inspector\n• Held vs Mandatory checklist audit\n• Readiness Score & CSC roadmap"]
+            A6["Agent 6: Action Planner\n• 'YOUR NEXT 4 STEPS' sequential plan\n• Authority & SLA mapping"]
+            A5 --> A6
+        end
+
+        subgraph PipeD ["Stage 4: Autonomous Delivery & Legal Recourse"]
+            A7["Agent 7: Application Packaging\n• Mint Official Application Dossier PDF\n• ReportLab QR & Barcode seal"]
+            A8["Agent 8: Grievance Assistant\n• 6 Verified civic issue types\n• Citizen Charter 30-Day SLA citation"]
+            A7 --> A8
+        end
+
+        PipeA ==> PipeB ==> PipeC ==> PipeD
     end
+
+    CoreGateway ==> PipeA
+
+    subgraph Layer3 ["🏛️ NATIONAL DPI & STATUTORY FOUNDATION"]
+        direction LR
+        DPI1[("📜 12 Configured Schemes DB\n(Central & State Gazette Rules)")]
+        DPI2[("🔗 DigiLocker API Attestation\n(Simulated XML Verification)")]
+        DPI3[("⚖️ Citizen Charter Standards\n(Statutory 30-Day Resolution SLA)")]
+    end
+
+    PipeB -.-> DPI1
+    PipeC -.-> DPI2
+    PipeD -.-> DPI3
+
+    subgraph Layer4 ["📑 TANGIBLE CIVIC DELIVERABLES & OUTPUTS"]
+        direction LR
+        O1["🏛️ Welfare Opportunity Board\n(5-Second Answer Dashboard)"]
+        O2["📑 Official Application Dossier\n(Draft PDF for CSC Submission)"]
+        O3["🗺️ Action Plan Roadmap\n(Next 4 Sequential Steps)"]
+        O4["⚖️ Formal CPGRAMS Petition\n(Enforceable Legal Appeal)"]
+        O5["📦 /aikart/output.json\n(Zero-Egress Sandbox Contract)"]
+    end
+
+    PipeD ==> Layer4
 ```
 
 ---

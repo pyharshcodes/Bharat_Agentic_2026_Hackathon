@@ -39,7 +39,25 @@
 ---
 
 ## 🧠 SLIDE 4: 8-Agent Cognitive Swarm Architecture
-Jan-Sahayak breaks down the civic delivery challenge into 8 specialized autonomous agents:
+Jan-Sahayak breaks down the civic delivery challenge into 4 sequential stages executed by 8 specialized autonomous agents:
+
+```mermaid
+flowchart TB
+    subgraph S1 ["Stage 1: Intake & Privacy"]
+        A1["1. Intake & NLP Parser"] --> A2["2. Profile Verification (DPDP Masked)"]
+    end
+    subgraph S2 ["Stage 2: Statutory Reasoning"]
+        A3["3. Scheme Discovery (12 Programs)"] --> A4["4. Eligibility Rules Engine (4 States)"]
+    end
+    subgraph S3 ["Stage 3: Compliance & Planning"]
+        A5["5. Document Inspector (Gap Audit)"] --> A6["6. Action Planner (Next 4 Steps)"]
+    end
+    subgraph S4 ["Stage 4: Autonomous Delivery"]
+        A7["7. Packaging Agent (PDF Dossier)"] --> A8["8. Grievance Redressal (30-Day SLA)"]
+    end
+    S1 ==> S2 ==> S3 ==> S4
+```
+
 1. **Intake & NLP Parser Agent:** Ingests vernacular voice/text, normalizes into Minimum Necessary Data format with progressive disclosure.
 2. **Profile Verification Agent:** Validates demographic boundaries and ensures DPDP Act 2023 compliance.
 3. **Scheme Discovery Agent:** Scans 12 configured Central & State schemes for jurisdiction and socio-economic category.

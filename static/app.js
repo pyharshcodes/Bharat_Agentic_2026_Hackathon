@@ -1,6 +1,6 @@
 // Jan-Sahayak AI - Production GovTech Client-Side Controller
-// Built by Team Bits and Bytes (Harsh Deep Chak & Pallak Devi)
-// Autonomous Welfare & Civic Rights Action Agent for Bharat
+// Built by Team BITS AND BYTES (Harsh Deep Chak & Pallak Devi)
+// Autonomous Welfare & Civic Rights Agent
 
 let activePersonaId = "rameshwar_farmer";
 let currentRunResult = null;
@@ -29,28 +29,50 @@ async function loadSchemesCatalogue() {
 }
 
 function setupEventListeners() {
-  // Persona Card Clicks
-  const personaCards = document.querySelectorAll(".persona-card");
-  personaCards.forEach(card => {
-    card.addEventListener("click", () => {
-      personaCards.forEach(c => c.classList.remove("active"));
-      card.classList.add("active");
-      activePersonaId = card.getAttribute("data-id");
+  // Header Navigation Buttons
+  const headerAuditBtn = document.getElementById("headerAuditBtn");
+  if (headerAuditBtn) {
+    headerAuditBtn.addEventListener("click", () => {
+      triggerAuditAction();
+    });
+  }
+
+  const headerExploreBtn = document.getElementById("headerExploreBtn");
+  if (headerExploreBtn) {
+    headerExploreBtn.addEventListener("click", () => {
+      const target = document.getElementById("schemesSection");
+      if (target) target.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  const heroPrimaryCta = document.getElementById("heroPrimaryCta");
+  if (heroPrimaryCta) {
+    heroPrimaryCta.addEventListener("click", () => {
+      triggerAuditAction();
+    });
+  }
+
+  // Persona Chips Selection
+  const personaChips = document.querySelectorAll(".persona-chip");
+  personaChips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      personaChips.forEach(c => {
+        c.classList.remove("active");
+        c.setAttribute("aria-checked", "false");
+      });
+      chip.classList.add("active");
+      chip.setAttribute("aria-checked", "true");
+      activePersonaId = chip.getAttribute("data-id");
       document.getElementById("customQueryInput").value = "";
       runWorkflow({ persona_id: activePersonaId });
     });
   });
 
-  // Launch Button Click
+  // Launch Button (Run Welfare Audit)
   const launchBtn = document.getElementById("launchBtn");
   if (launchBtn) {
     launchBtn.addEventListener("click", () => {
-      const customQuery = document.getElementById("customQueryInput").value.trim();
-      if (customQuery.length > 0) {
-        runWorkflow({ custom_query: customQuery });
-      } else {
-        runWorkflow({ persona_id: activePersonaId });
-      }
+      triggerAuditAction();
     });
   }
 
@@ -58,8 +80,12 @@ function setupEventListeners() {
   const filterChips = document.querySelectorAll(".filter-chip");
   filterChips.forEach(chip => {
     chip.addEventListener("click", () => {
-      filterChips.forEach(c => c.classList.remove("active"));
+      filterChips.forEach(c => {
+        c.classList.remove("active");
+        c.setAttribute("aria-selected", "false");
+      });
       chip.classList.add("active");
+      chip.setAttribute("aria-selected", "true");
       activeCategoryFilter = chip.getAttribute("data-cat");
       if (currentRunResult && currentRunResult.evaluation) {
         renderSchemes(currentRunResult.evaluation);
@@ -76,6 +102,7 @@ function setupEventListeners() {
       const isVisible = ineligibleList.style.display !== "none";
       ineligibleList.style.display = isVisible ? "none" : "flex";
       ineligibleArrow.innerText = isVisible ? "▼" : "▲";
+      toggleIneligibleBtn.setAttribute("aria-expanded", !isVisible);
     });
   }
 
@@ -99,15 +126,15 @@ function setupEventListeners() {
         const lang = document.getElementById("langSelect").value;
         renderResults(updated, lang);
         digilockerBtn.innerText = "✓ Synced via DigiLocker!";
-        setTimeout(() => digilockerBtn.innerText = "🔗 Fetch via DigiLocker", 3000);
+        setTimeout(() => digilockerBtn.innerText = "🔗 Sync via DigiLocker", 3000);
       } catch (err) {
         console.error(err);
-        digilockerBtn.innerText = "🔗 Fetch via DigiLocker";
+        digilockerBtn.innerText = "🔗 Sync via DigiLocker";
       }
     });
   }
 
-  // Quick Grievance Drafter Button
+  // Quick Grievance Drafter Button (6 Verified Issue Types)
   const quickGrievanceBtn = document.getElementById("quickGrievanceBtn");
   if (quickGrievanceBtn) {
     quickGrievanceBtn.addEventListener("click", async () => {
@@ -133,15 +160,18 @@ function setupEventListeners() {
           const petition = await res.json();
           renderGrievanceCard(petition);
           quickGrievanceBtn.innerText = "✓ Petition Drafted!";
-          setTimeout(() => quickGrievanceBtn.innerText = "⚖️ Draft Statutory Petition", 2500);
+          setTimeout(() => quickGrievanceBtn.innerText = "⚖️ Draft Formal Statutory Petition", 2500);
           
           // Scroll smoothly to the grievance card
           const card = document.getElementById("grievanceCard");
-          if (card) card.scrollIntoView({ behavior: "smooth", block: "center" });
+          if (card) {
+            card.style.display = "flex";
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
         }
       } catch (err) {
         console.error("Grievance drafting error:", err);
-        quickGrievanceBtn.innerText = "⚖️ Draft Statutory Petition";
+        quickGrievanceBtn.innerText = "⚖️ Draft Formal Statutory Petition";
       }
     });
   }
@@ -185,7 +215,7 @@ function setupEventListeners() {
     voiceBtn.addEventListener("click", () => {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert("Speech Recognition is not supported on this browser. Please type your query in the search bar.");
+        alert("Speech Recognition is not supported on this browser. Please type your query in the input box.");
         return;
       }
       const recognition = new SpeechRecognition();
@@ -228,6 +258,15 @@ function setupEventListeners() {
 
   // Bilingual Speech Button
   setupAudioPlayer();
+}
+
+function triggerAuditAction() {
+  const customQuery = document.getElementById("customQueryInput").value.trim();
+  if (customQuery.length > 0) {
+    runWorkflow({ custom_query: customQuery });
+  } else {
+    runWorkflow({ persona_id: activePersonaId });
+  }
 }
 
 function setupWizardSimulator() {
@@ -364,26 +403,26 @@ function setupWizardSimulator() {
       }
 
       customizerModal.style.display = "none";
-      const personaCards = document.querySelectorAll(".persona-card");
-      personaCards.forEach(c => c.classList.remove("active"));
+      const personaChips = document.querySelectorAll(".persona-chip");
+      personaChips.forEach(c => c.classList.remove("active"));
       runWorkflow(customProfile);
     });
   }
 }
 
 function updateWizardView() {
-  // Update step indicators
   const stepIndicators = document.querySelectorAll(".w-step");
   stepIndicators.forEach(stepInd => {
     const stepNum = parseInt(stepInd.getAttribute("data-wstep"));
     if (stepNum === currentWizardStep) {
       stepInd.classList.add("active");
+      stepInd.setAttribute("aria-selected", "true");
     } else {
       stepInd.classList.remove("active");
+      stepInd.setAttribute("aria-selected", "false");
     }
   });
 
-  // Update panels
   for (let i = 1; i <= 7; i++) {
     const panel = document.getElementById(`wPanel-${i}`);
     if (panel) {
@@ -391,7 +430,6 @@ function updateWizardView() {
     }
   }
 
-  // Update navigation buttons
   const wPrevBtn = document.getElementById("wPrevBtn");
   const wNextBtn = document.getElementById("wNextBtn");
   const applyCustomizerBtn = document.getElementById("applyCustomizerBtn");
@@ -414,7 +452,7 @@ function setupAudioPlayer() {
           audioPlayer.currentTime = 0;
         }
         isSpeaking = false;
-        speakBtn.innerText = "🔊 Listen in Hindi / English";
+        speakBtn.innerHTML = "<span>🔊 Listen in Hindi / English</span>";
         return;
       }
 
@@ -429,11 +467,11 @@ function setupAudioPlayer() {
 
         utterance.onend = () => {
           isSpeaking = false;
-          speakBtn.innerText = "🔊 Listen in Hindi / English";
+          speakBtn.innerHTML = "<span>🔊 Listen in Hindi / English</span>";
         };
 
         isSpeaking = true;
-        speakBtn.innerText = "⏹️ Stop Audio";
+        speakBtn.innerHTML = "<span>⏹️ Stop Audio</span>";
         window.speechSynthesis.speak(utterance);
       } else {
         try {
@@ -448,15 +486,15 @@ function setupAudioPlayer() {
             audioPlayer.src = d.audio_url;
             audioPlayer.play();
             isSpeaking = true;
-            speakBtn.innerText = "⏹️ Stop Audio";
+            speakBtn.innerHTML = "<span>⏹️ Stop Audio</span>";
             audioPlayer.onended = () => {
               isSpeaking = false;
-              speakBtn.innerText = "🔊 Listen in Hindi / English";
+              speakBtn.innerHTML = "<span>🔊 Listen in Hindi / English</span>";
             };
           }
         } catch (err) {
           console.error("Audio error:", err);
-          speakBtn.innerText = "🔊 Listen in Hindi / English";
+          speakBtn.innerHTML = "<span>🔊 Listen in Hindi / English</span>";
         }
       }
     });
@@ -494,8 +532,8 @@ function setPipelineRunning() {
   for (let i = 1; i <= 8; i++) {
     const stepEl = document.getElementById(`step-${i}`);
     if (stepEl) {
-      stepEl.className = "pipeline-step step-running";
-      stepEl.querySelector(".step-status").innerText = "⚙️";
+      stepEl.className = "pipe-node running";
+      stepEl.querySelector(".node-status").innerText = "⚙️";
     }
   }
 }
@@ -526,55 +564,63 @@ function renderResults(data, lang) {
   telemetry.forEach(step => {
     const stepEl = document.getElementById(`step-${step.step}`);
     if (stepEl) {
-      stepEl.className = "pipeline-step step-completed";
-      stepEl.querySelector(".step-status").innerText = "✅";
-      stepEl.querySelector(".step-desc").innerText = `${step.duration_ms}ms • ${step.output_summary}`;
+      stepEl.className = "pipe-node completed";
+      stepEl.querySelector(".node-status").innerText = "✓";
+      stepEl.querySelector(".node-desc").innerText = `${step.duration_ms}ms • ${step.agent.split(" ")[0]}`;
     }
   });
 
   // Step 8 check (Grievance)
   const step8 = document.getElementById("step-8");
   if (data.grievance && step8) {
-    step8.className = "pipeline-step step-completed";
-    step8.querySelector(".step-status").innerText = "✅";
-    step8.querySelector(".step-desc").innerText = `Drafted formal CPGRAMS petition for ${data.grievance.authority}`;
+    step8.className = "pipe-node completed";
+    step8.querySelector(".node-status").innerText = "✓";
+    step8.querySelector(".node-desc").innerText = `Petition Ready`;
   } else if (step8) {
-    step8.className = "pipeline-step";
-    step8.querySelector(".step-status").innerText = "—";
-    step8.querySelector(".step-desc").innerText = "No delay detected. Standby mode.";
+    step8.className = "pipe-node";
+    step8.querySelector(".node-status").innerText = "—";
+    step8.querySelector(".node-desc").innerText = "Standby";
   }
 
-  // 2. Executive Dashboard Updates
-  document.getElementById("runtimeBadge").innerText = `Runtime: ${data.total_runtime_ms} ms`;
-  document.getElementById("metricLatency").innerText = `${data.total_runtime_ms} ms`;
-
-  const citName = data.profile ? data.profile.name : "Citizen";
-  const citRole = data.profile ? `${data.profile.occupation} (${data.profile.state})` : "";
-  const subEl = document.getElementById("dashboardCitizenSubtitle");
-  if (subEl) subEl.innerText = `Deterministic entitlement analysis for ${citName} • ${citRole}`;
-
+  // 2. Update 4 5-Second Opportunity Cards
   const evalData = data.evaluation || {};
-  animateNumber("metricEligibleCount", evalData.eligible_count || 0);
-  animateNumber("metricPotentialCount", evalData.potential_count || 0);
-  
-  const elValEl = document.getElementById("metricEligibleValue");
-  if (elValEl) elValEl.innerText = `₹${(evalData.total_estimated_annual_benefit_inr || 0).toLocaleString('en-IN')} / year`;
-  
-  const potValEl = document.getElementById("metricPotentialValue");
-  if (potValEl) potValEl.innerText = `₹${(evalData.total_potential_benefit_inr || 0).toLocaleString('en-IN')} unlockable`;
-
   const gapData = data.gap_audit || {};
-  animateNumber("metricReadinessScore", gapData.overall_document_readiness_score || 0, "", "%");
+
+  animateNumber("metricBenefits", evalData.total_estimated_annual_benefit_inr || 0, "₹");
   
-  const missingDocsCount = gapData.missing_documents_count || 0;
-  const missEl = document.getElementById("metricMissingDocsCount");
-  if (missEl) missEl.innerText = `${missingDocsCount} Missing Document(s)`;
+  const elCount = evalData.eligible_count || 0;
+  const potCount = evalData.potential_count || 0;
+  const subEl = document.getElementById("metricSchemesSub");
+  if (subEl) subEl.innerText = `${elCount} Direct Welfare Schemes Qualified`;
+
+  const potValEl = document.getElementById("metricPotentialVal");
+  if (potValEl) potValEl.innerText = `₹${(evalData.total_potential_benefit_inr || 0).toLocaleString('en-IN')}`;
+
+  const missingCount = gapData.missing_documents_count || 0;
+  const missEl = document.getElementById("metricMissingCount");
+  if (missEl) missEl.innerText = missingCount === 0 ? "0 Documents Missing" : `${missingCount} Document${missingCount > 1 ? 's' : ''} Needed`;
+
+  const readScore = gapData.overall_document_readiness_score || 0;
+  const readEl = document.getElementById("metricReadinessScore");
+  if (readEl) readEl.innerText = `Dossier Readiness: ${readScore}%`;
+
+  const plansCount = data.action_plans ? data.action_plans.length : 0;
+  const plansEl = document.getElementById("metricPlansCount");
+  if (plansEl) plansEl.innerText = `${plansCount} Action Roadmap${plansCount > 1 ? 's' : ''}`;
+
+  const runtimeBadge = document.getElementById("runtimeBadge");
+  if (runtimeBadge) runtimeBadge.innerText = `Runtime: ${data.total_runtime_ms} ms`;
 
   // 3. Update Bilingual Summary Box
   const isHindi = lang === "Hindi";
   const summaryBox = document.getElementById("summaryText");
   if (summaryBox && data.bilingual_response) {
     summaryBox.innerText = isHindi ? data.bilingual_response.hindi : data.bilingual_response.english;
+  }
+
+  const activeCitEl = document.getElementById("activeCitizenTitle");
+  if (activeCitEl && data.profile) {
+    activeCitEl.innerText = `Assessment for ${data.profile.name} (${data.profile.occupation}, ${data.profile.state})`;
   }
 
   // 4. Render Schemes List & Ineligible Accordion
@@ -588,7 +634,7 @@ function renderResults(data, lang) {
   if (pdfBtn) {
     if (data.pdf_filename) {
       pdfBtn.disabled = false;
-      pdfBtn.innerHTML = `<span>📥 Download Application PDF (${data.pdf_filename})</span>`;
+      pdfBtn.innerHTML = `<span>📥 Download Application PDF Draft (${data.pdf_filename})</span>`;
     } else {
       pdfBtn.disabled = true;
     }
@@ -621,11 +667,11 @@ function renderSchemes(evalData) {
   const totalVisible = filteredEligible.length + filteredPotential.length + filteredInsufficient.length;
   const labelEl = document.getElementById("schemesFoundLabel");
   if (labelEl) {
-    labelEl.innerText = `Showing ${totalVisible} matching schemes (${filteredEligible.length} Qualified, ${filteredPotential.length} Potential)`;
+    labelEl.innerText = `Showing ${totalVisible} matching schemes (${filteredEligible.length} Qualified, ${filteredPotential.length} Potential) based on statutory gazette criteria`;
   }
 
   if (totalVisible === 0) {
-    schemesList.innerHTML = `<div style="padding:24px; text-align:center; color:var(--text-muted); background:#FFFFFF; border-radius:8px; border:1px solid var(--border-color);">No active schemes found matching category '${activeCategoryFilter}'.</div>`;
+    schemesList.innerHTML = `<div style="grid-column: 1 / -1; padding:28px; text-align:center; color:var(--text-muted); background:#FFFFFF; border-radius:12px; border:1px solid var(--border-color);">No active schemes found matching category '${activeCategoryFilter}'.</div>`;
   }
 
   // 1. Render Eligible Schemes
@@ -658,7 +704,7 @@ function renderSchemes(evalData) {
         row.className = "ineligible-item";
         row.innerHTML = `
           <div class="ineligible-item-title">${item.scheme_name} (${item.hindi_name || ''})</div>
-          <div class="ineligible-item-reason">❌ Disqualification Reason: ${item.why_ineligible || 'Demographic criteria not satisfied'}</div>
+          <div class="ineligible-item-reason">❌ Statutory Exclusion: ${item.why_ineligible || 'Demographic criteria not satisfied'}</div>
         `;
         inelListEl.appendChild(row);
       });
@@ -696,7 +742,7 @@ function createSchemeCard(scheme, statusType) {
   if (scheme.why_qualify && scheme.why_qualify.length > 0) {
     whyItemsHtml = `
       <div class="why-qualify-list">
-        <div class="why-qualify-title">Deterministic Qualification Rules:</div>
+        <div class="why-qualify-title">Deterministic Qualification Checklist:</div>
         ${scheme.why_qualify.map(q => `<div class="why-qualify-item">✓ ${q}</div>`).join("")}
       </div>
     `;
@@ -724,11 +770,11 @@ function createSchemeCard(scheme, statusType) {
     ${whyItemsHtml}
     ${missingDocsHtml}
     <div class="scheme-footer">
-      <span style="color:var(--text-muted); font-size:11px;">Effort: <strong>${scheme.estimated_effort || 'Low'}</strong></span>
+      <span style="color:var(--text-muted); font-size:11px;">Administrative Effort: <strong>${scheme.estimated_effort || 'Low'}</strong></span>
       <div class="scheme-card-btns">
         <button class="btn-secondary btn-detail-trigger">View Details</button>
         <a href="#actionPlanSection" class="btn-primary-small">Action Plan ↓</a>
-        <a href="${scheme.official_url || scheme.nodal_portal || '#'}" target="_blank" class="btn-secondary" style="color:#0066CC;">Portal ↗</a>
+        <a href="${scheme.official_url || scheme.nodal_portal || '#'}" target="_blank" rel="noopener" class="btn-secondary" style="color:#0066CC;">Portal ↗</a>
       </div>
     </div>
   `;
@@ -752,7 +798,7 @@ function renderDocumentAudit(profile, gapData) {
   const pBar = document.getElementById("docProgressBar");
   const pText = document.getElementById("docProgressText");
   if (pBar) pBar.style.width = `${score}%`;
-  if (pText) pText.innerText = `Readiness Score: ${score}% (${gapData.held_documents ? gapData.held_documents.length : 0} Held / ${gapData.missing_documents_count || 0} Missing)`;
+  if (pText) pText.innerText = `${score}% Verified (${gapData.held_documents ? gapData.held_documents.length : 0} Held / ${gapData.missing_documents_count || 0} Missing)`;
 
   // 1. Verified Documents
   (profile && profile.existing_documents ? profile.existing_documents : []).forEach(doc => {
@@ -761,7 +807,7 @@ function renderDocumentAudit(profile, gapData) {
     item.innerHTML = `
       <div>
         <strong style="color:var(--primary-navy);">${doc}</strong>
-        <div style="font-size:11px; color:#15803D;">Cryptographically Attested (e-KYC verified)</div>
+        <div style="font-size:11px; color:#15803D;">Cryptographically Attested (e-KYC Verified)</div>
       </div>
       <span class="doc-status-ok">VERIFIED ✓</span>
     `;
@@ -777,7 +823,7 @@ function renderDocumentAudit(profile, gapData) {
       <div>
         <strong style="color:#991B1B;">${rem.document_name}</strong>
         <div style="font-size:11px; color:#64748B;">
-          Office: ${g.issuing_authority || 'Tehsil / CSC'} • Portal: ${g.online_portal || 'State Portal'} (${g.typical_turnaround || '7-14 days'})
+          Issuing Authority: ${g.issuing_authority || 'Tehsil / CSC'} • Portal: ${g.online_portal || 'State Portal'} (${g.typical_turnaround || '7-14 days'})
         </div>
       </div>
       <span class="doc-status-missing">MISSING ✗</span>
@@ -791,7 +837,7 @@ function renderGrievanceCard(grievanceData) {
   if (!grievanceCard) return;
 
   if (grievanceData) {
-    grievanceCard.style.display = "block";
+    grievanceCard.style.display = "flex";
     const titleEl = document.getElementById("grievanceTitle");
     const subEl = document.getElementById("grievanceSub");
     const textEl = document.getElementById("grievanceText");
@@ -810,7 +856,7 @@ function renderActionPlans(actionPlans) {
   container.innerHTML = "";
 
   if (actionPlans.length === 0) {
-    container.innerHTML = `<div style="padding:18px; text-align:center; color:var(--text-muted); background:#FAFCFE; border-radius:8px;">No action plans required for current profile.</div>`;
+    container.innerHTML = `<div style="padding:22px; text-align:center; color:var(--text-muted); background:#FFFFFF; border-radius:12px; border:1px solid var(--border-color);">No action plans required for current profile.</div>`;
     return;
   }
 
@@ -833,7 +879,7 @@ function renderActionPlans(actionPlans) {
           <div class="plan-scheme-title">${plan.scheme_name} (${plan.hindi_name || ''})</div>
           <div style="font-size:12px; color:var(--text-muted);">Est. Benefit: <strong style="color:var(--green);">${plan.estimated_benefit}</strong> • Effort: ${plan.estimated_effort}</div>
         </div>
-        <a href="${plan.official_url || '#'}" target="_blank" class="launch-btn" style="padding:6px 14px; font-size:11px; text-decoration:none;">Apply on Portal ↗</a>
+        <a href="${plan.official_url || '#'}" target="_blank" rel="noopener" class="btn-nav-primary" style="padding:6px 14px; font-size:11px; text-decoration:none;">Apply on Official Portal ↗</a>
       </div>
       <div class="plan-steps-grid">
         ${stepsHtml}
@@ -872,13 +918,13 @@ function openSchemeDetailModal(scheme) {
     <div style="margin-bottom:16px;">
       <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:800; margin-bottom:6px;">Mandatory Submission Checklist</div>
       <div style="display:flex; flex-wrap:wrap; gap:6px;">
-        ${(scheme.mandatory_documents || []).map(d => `<span class="tag" style="background:#EEF2F6; padding:4px 8px;">${d}</span>`).join("")}
+        ${(scheme.mandatory_documents || []).map(d => `<span class="ptag" style="background:#EEF2F6; padding:4px 8px;">${d}</span>`).join("")}
       </div>
     </div>
 
     <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:14px;">
-      <span style="font-size:12px; color:var(--text-muted);">Appellate Officer: <strong>${scheme.appeal_authority || 'District Magistrate / Collector'}</strong></span>
-      <a href="${scheme.official_url || scheme.nodal_portal || '#'}" target="_blank" class="launch-btn" style="text-decoration:none; padding:8px 16px; font-size:12px;">Visit Official Portal ↗</a>
+      <span style="font-size:12px; color:var(--text-muted);">Appellate Authority: <strong>${scheme.appeal_authority || 'District Magistrate / Collector'}</strong></span>
+      <a href="${scheme.official_url || scheme.nodal_portal || '#'}" target="_blank" rel="noopener" class="btn-nav-primary" style="text-decoration:none; padding:8px 16px; font-size:12px;">Visit Official Portal ↗</a>
     </div>
   `;
 

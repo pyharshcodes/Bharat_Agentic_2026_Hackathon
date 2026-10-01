@@ -219,13 +219,13 @@ class SchemeReasoningEngine:
             status = "INSUFFICIENT DATA"
             match_score = 40
             next_step = f"Provide missing information: {', '.join(missing_info)}."
-        elif len(missing_docs) > 0:
+        elif len(missing_docs) >= 3:
             status = "POTENTIALLY ELIGIBLE"
-            match_score = max(50, 100 - (len(missing_docs) * 15))
-            next_step = f"Obtain {len(missing_docs)} missing document(s) before applying: {missing_docs[0]}."
+            match_score = max(55, 100 - (len(missing_docs) * 10))
+            next_step = f"Obtain missing prerequisite documents before submission: {missing_docs[0]}."
         else:
             status = "ELIGIBLE"
-            match_score = 100
+            match_score = max(85, 100 - (len(missing_docs) * 5))
             next_step = "Proceed to submit official beneficiary registration dossier."
 
         return {
