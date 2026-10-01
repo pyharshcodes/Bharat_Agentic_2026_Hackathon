@@ -27,6 +27,7 @@
       </div>
 
       <div class="header-badges">
+        <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙 Dark Mode</button>
         <span class="badge badge-accent">🏆 BharatAgentic 2026</span>
         <span class="badge badge-success"><span class="dot-pulse"></span> Sandbox Ready</span>
         <span class="badge badge-outline">Multi-Agent Swarm</span>
@@ -54,8 +55,8 @@
         <div class="persona-card active" data-id="rameshwar_farmer">
           <div class="persona-icon">🌾</div>
           <div class="persona-info">
-            <div class="persona-name">Rameshwar Yadav</div>
-            <div class="persona-meta">Small Farmer • Gorakhpur, UP</div>
+            <div class="persona-name">Ramesh: Small Farmer in UP</div>
+            <div class="persona-meta">Marginal Farmer • Gorakhpur, UP</div>
             <div class="persona-tags">
               <span class="tag">Income: ₹1.4L</span>
               <span class="tag">1.2 Acres</span>
@@ -68,8 +69,8 @@
         <div class="persona-card" data-id="sunita_street_vendor">
           <div class="persona-icon">🛒</div>
           <div class="persona-info">
-            <div class="persona-name">Sunita Devi</div>
-            <div class="persona-meta">Street Vendor • Chandni Chowk, Delhi</div>
+            <div class="persona-name">Sunita: Urban Street Vendor in Delhi</div>
+            <div class="persona-meta">Fruit Vendor • Chandni Chowk, Delhi</div>
             <div class="persona-tags">
               <span class="tag">Income: ₹95K</span>
               <span class="tag">Urban BPL</span>
@@ -79,11 +80,11 @@
           </div>
         </div>
 
-        <div class="persona-card" data-id="kamala_widow">
+        <div class="persona-card" data-id="kavita_widow">
           <div class="persona-icon">👵</div>
           <div class="persona-info">
-            <div class="persona-name">Kamala Bai</div>
-            <div class="persona-meta">Elderly Widow • Jabalpur, MP</div>
+            <div class="persona-name">Kavita: Rural Widow in MP</div>
+            <div class="persona-meta">Destitute Widow • Jabalpur, MP</div>
             <div class="persona-tags">
               <span class="tag alert-tag">🚨 Pension Delayed 114 Days</span>
               <span class="tag">BPL Kutcha House</span>
@@ -95,8 +96,8 @@
         <div class="persona-card" data-id="rafiq_artisan">
           <div class="persona-icon">🪵</div>
           <div class="persona-info">
-            <div class="persona-name">Mohammad Rafiq</div>
-            <div class="persona-meta">Woodcarver Artisan • Saharanpur, UP</div>
+            <div class="persona-name">Mohammad Rafiq: Artisan in UP</div>
+            <div class="persona-meta">Master Woodcarver • Saharanpur, UP</div>
             <div class="persona-tags">
               <span class="tag">Income: ₹1.2L</span>
               <span class="tag">Traditional Trade</span>
@@ -292,6 +293,32 @@
       </div>
     </div>
   </footer>
+
+  <!-- Agent Telemetry Inspection Modal -->
+  <div class="modal-backdrop" id="telemetryModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-icon">🔍</span>
+          <h3 id="modalAgentName">Agent Cognitive Trace</h3>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta-grid">
+          <div><strong>Agent Type:</strong> <span id="modalAgentType">--</span></div>
+          <div><strong>Latency:</strong> <span id="modalLatency">-- ms</span></div>
+          <div><strong>Status:</strong> <span id="modalStatus" class="status-pill">COMPLETED</span></div>
+        </div>
+        <div class="modal-section-title">Execution Context & Reasoning:</div>
+        <div class="modal-trace-box" id="modalTraceContent">--</div>
+        <div class="modal-section-title">Raw Telemetry Payload:</div>
+        <pre class="modal-json-box" id="modalJsonContent"></pre>
+      </div>
+    </div>
+  </div>
+
+  <audio id="ttsAudioPlayer" style="display: none;"></audio>
 
   <script src="/static/app.js"></script>
 </body>

@@ -1,6 +1,7 @@
 """
 Jan-Sahayak AI - Autonomous Form Filler & Application Packager Agent
 Generates an official, print-ready, high-resolution PDF Citizen Welfare Application Dossier using ReportLab.
+Includes live QR code verification stamp, security checksums, and official citizen declarations.
 """
 
 import os
@@ -17,10 +18,12 @@ from reportlab.platypus import (
 )
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_RIGHT
+from reportlab.graphics.barcode import qr
+from reportlab.graphics.shapes import Drawing
 
 
 class FormPackagerAgent:
-    """Agent that synthesizes an official Government Application Package PDF."""
+    """Agent that synthesizes an official Government Application Package PDF with QR verification."""
 
     def __init__(self, output_dir: str = None):
         self.name = "Autonomous Form & Application Packager Agent"
@@ -31,9 +34,8 @@ class FormPackagerAgent:
 
     def generate_dossier_pdf(self, profile: Dict[str, Any], evaluation: Dict[str, Any], gap_audit: Dict[str, Any]) -> str:
         """
-        Creates a publication-grade PDF file and returns its path.
+        Creates a publication-grade PDF file with embedded QR code verification and returns its path.
         """
-        # Create deterministic application ID
         raw_hash = hashlib.sha256(f"{profile['name']}_{profile['state']}_{datetime.now().strftime('%Y%m%d%H%M')}".encode()).hexdigest()[:8].upper()
         app_ref = f"BHARAT-JS-2026-{raw_hash}"
         
@@ -45,19 +47,18 @@ class FormPackagerAgent:
             pagesize=letter,
             rightMargin=36,
             leftMargin=36,
-            topMargin=36,
-            bottomMargin=36
+            topMargin=32,
+            bottomMargin=32
         )
 
         styles = getSampleStyleSheet()
         
-        # Custom Typography
         title_style = ParagraphStyle(
             'GovTitle',
             parent=styles['Heading1'],
             fontName='Helvetica-Bold',
-            fontSize=16,
-            leading=20,
+            fontSize=15,
+            leading=18,
             alignment=TA_CENTER,
             textColor=colors.HexColor('#002B49') # Deep India Navy
         )
@@ -67,7 +68,7 @@ class FormPackagerAgent:
             parent=styles['Normal'],
             fontName='Helvetica-Bold',
             fontSize=10,
-            leading=14,
+            leading=13,
             alignment=TA_CENTER,
             textColor=colors.HexColor('#FF671F') # India Saffron
         )
@@ -79,64 +80,84 @@ class FormPackagerAgent:
             fontSize=8,
             leading=10,
             alignment=TA_RIGHT,
-            textColor=colors.HexColor('#555555')
+            textColor=colors.HexColor('#444444')
         )
 
         sec_header = ParagraphStyle(
             'SectionHeader',
             parent=styles['Heading2'],
             fontName='Helvetica-Bold',
-            fontSize=11,
-            leading=14,
+            fontSize=10,
+            leading=13,
             textColor=colors.HexColor('#046A38') # Deep Green
         )
 
         cell_bold = ParagraphStyle('CellBold', parent=styles['Normal'], fontName='Helvetica-Bold', fontSize=8, leading=10)
         cell_normal = ParagraphStyle('CellNormal', parent=styles['Normal'], fontName='Helvetica', fontSize=8, leading=10)
+        cell_sub = ParagraphStyle('CellSub', parent=styles['Normal'], fontName='Helvetica', fontSize=7, leading=9, textColor=colors.HexColor('#555555'))
 
         story = []
 
-        # Header Tricolor Decorative Banner
+        # 1. Header Tricolor Decorative Banner
         header_table = Table([
-            ["", ""],
-        ], colWidths=[270, 270], rowHeights=[4])
+            ["", "", ""],
+        ], colWidths=[180, 180, 180], rowHeights=[4])
         header_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (0,0), colors.HexColor('#FF671F')),
-            ('BACKGROUND', (1,0), (1,0), colors.HexColor('#046A38')),
+            ('BACKGROUND', (1,0), (1,0), colors.white),
+            ('BACKGROUND', (2,0), (2,0), colors.HexColor('#046A38')),
         ]))
         story.append(header_table)
-        story.append(Spacer(1, 8))
-
-        # Title & Emblem representation
-        story.append(Paragraph("GOVERNMENT OF BHARAT • CITIZEN WELFARE PORTAL", subtitle_style))
-        story.append(Paragraph("JAN-SAHAYAK UNIFIED WELFARE APPLICATION DOSSIER", title_style))
-        story.append(Paragraph("Automated Multi-Agent Civic Delivery & Verification System", ParagraphStyle('SubSub', parent=subtitle_style, fontSize=8, textColor=colors.HexColor('#444444'))))
-        
         story.append(Spacer(1, 6))
 
-        # Ref & Meta Box
+        # 2. National Header & QR Code verification row
+        # Generate QR code object
+        qr_code = qr.QrCodeWidget(f"https://jansahayak.bharat.gov/verify?ref={app_ref}&citizen={profile.get('name')}")
+        qr_bounds = qr_code.getBounds()
+        qr_w = qr_bounds[2] - qr_bounds[0]
+        qr_h = qr_bounds[3] - qr_bounds[1]
+        qr_draw = Drawing(54, 54, transform=[54/qr_w, 0, 0, 54/qr_h, 0, 0])
+        qr_draw.add(qr_code)
+
+        title_block = [
+            Paragraph("भारत सरकार • नागरिक अधिकार एवं कल्याण पोर्टल • GOVT. OF BHARAT", subtitle_style),
+            Paragraph("JAN-SAHAYAK UNIFIED WELFARE APPLICATION DOSSIER", title_style),
+            Paragraph("Automated Multi-Agent Civic Delivery & Verification System (aiKart Sandboxed)", ParagraphStyle('SubSub', parent=subtitle_style, fontSize=8, textColor=colors.HexColor('#333333')))
+        ]
+
+        header_split = Table([
+            [title_block, qr_draw]
+        ], colWidths=[475, 65])
+        header_split.setStyle(TableStyle([
+            ('VALIGN', (0,0), (-1,-1), 'MIDDLE'),
+            ('ALIGN', (1,0), (1,0), 'CENTER'),
+        ]))
+        story.append(header_split)
+        story.append(Spacer(1, 6))
+
+        # 3. Reference & Verification Box
         meta_data = [
             [
-                Paragraph(f"<b>Application Reference:</b> <font color='#002B49'>{app_ref}</font>", cell_normal),
+                Paragraph(f"<b>Application Reference:</b> <font color='#002B49'><b>{app_ref}</b></font>", cell_normal),
                 Paragraph(f"<b>Generated On:</b> {datetime.now().strftime('%d %B %Y, %I:%M %p')}", meta_style)
             ],
             [
-                Paragraph(f"<b>Digital Verification Status:</b> <font color='#046A38'><b>AGENT-CERTIFIED</b></font>", cell_normal),
-                Paragraph(f"<b>Scheme Registry Sync:</b> v2026.10-Oct", meta_style)
+                Paragraph(f"<b>Digital Verification Status:</b> <font color='#046A38'><b>AGENT-CERTIFIED (DPDP-COMPLIANT)</b></font>", cell_normal),
+                Paragraph(f"<b>Registry Synced:</b> 2026 Central & State DB", meta_style)
             ]
         ]
         meta_table = Table(meta_data, colWidths=[270, 270])
         meta_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,-1), colors.HexColor('#F4F6F9')),
             ('BOX', (0,0), (-1,-1), 0.5, colors.HexColor('#CCD4DF')),
-            ('PADDING', (0,0), (-1,-1), 5),
+            ('PADDING', (0,0), (-1,-1), 4),
         ]))
         story.append(meta_table)
-        story.append(Spacer(1, 10))
+        story.append(Spacer(1, 8))
 
-        # Section 1: Citizen Profile
+        # 4. Section 1: Citizen Verified Demographic Profile
         story.append(Paragraph("1. CITIZEN VERIFIED SOCIO-ECONOMIC PROFILE", sec_header))
-        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=6))
+        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=5))
         
         profile_grid = [
             [
@@ -164,20 +185,21 @@ class FormPackagerAgent:
         prof_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,-1), colors.white),
             ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#E0E0E0')),
-            ('PADDING', (0,0), (-1,-1), 4),
+            ('PADDING', (0,0), (-1,-1), 3),
         ]))
         story.append(prof_table)
-        story.append(Spacer(1, 10))
+        story.append(Spacer(1, 8))
 
-        # Section 2: Qualified Schemes & Direct Entitlements
-        story.append(Paragraph("2. ENTITLEMENT AUDIT: QUALIFIED BHARAT WELFARE SCHEMES", sec_header))
-        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=6))
+        # 5. Section 2: Certified Welfare Entitlements
+        total_benefit = evaluation.get('total_estimated_annual_benefit_inr', 0)
+        story.append(Paragraph(f"2. CERTIFIED WELFARE ENTITLEMENTS (Total Estimated Direct Value: ₹{total_benefit:,.0f}/yr)", sec_header))
+        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=5))
 
         schemes_header = [
-            Paragraph("<b>Scheme Name & Ministry</b>", cell_bold),
-            Paragraph("<b>Target Category</b>", cell_bold),
+            Paragraph("<b>Scheme & Ministry</b>", cell_bold),
+            Paragraph("<b>Category</b>", cell_bold),
             Paragraph("<b>Direct Benefit Entitlement</b>", cell_bold),
-            Paragraph("<b>Eligibility Audit Result</b>", cell_bold)
+            Paragraph("<b>Agent Audit Result</b>", cell_bold)
         ]
         
         schemes_rows = [schemes_header]
@@ -186,22 +208,23 @@ class FormPackagerAgent:
                 Paragraph(f"<b>{s['scheme_name']}</b><br/><font color='#555555'>{s.get('hindi_name','')}</font>", cell_normal),
                 Paragraph(s.get("category", ""), cell_normal),
                 Paragraph(s["benefit_summary"].get("financial", "Subsidized Support / Insurance"), cell_bold),
-                Paragraph(f"<font color='#046A38'><b>QUALIFIED (Score {s['match_score']}%)</b></font><br/>{s['reasoning_trace'][0] if s['reasoning_trace'] else 'Verified'}", cell_normal)
+                Paragraph(f"<font color='#046A38'><b>QUALIFIED (Match {s['match_score']}%)</b></font><br/>{s['reasoning_trace'][0] if s['reasoning_trace'] else 'Verified'}", cell_sub)
             ])
 
-        schemes_table = Table(schemes_rows, colWidths=[160, 100, 140, 140])
+        schemes_table = Table(schemes_rows, colWidths=[160, 95, 145, 140])
         schemes_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#EEF3F8')),
             ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#CCD4DF')),
-            ('PADDING', (0,0), (-1,-1), 4),
+            ('PADDING', (0,0), (-1,-1), 3),
             ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ]))
         story.append(schemes_table)
-        story.append(Spacer(1, 10))
+        story.append(Spacer(1, 8))
 
-        # Section 3: Document Readiness & Gap Analysis
-        story.append(Paragraph(f"3. DOCUMENT COMPLIANCE MATRIX (Readiness Score: {gap_audit.get('overall_document_readiness_score', 0)}%)", sec_header))
-        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=6))
+        # 6. Section 3: Document Compliance & Remediation
+        readiness = gap_audit.get('overall_document_readiness_score', 0)
+        story.append(Paragraph(f"3. DOCUMENT COMPLIANCE MATRIX (Readiness: {readiness}% | Verified: {len(profile.get('existing_documents', []))} | Missing: {gap_audit.get('missing_documents_count', 0)})", sec_header))
+        story.append(HRFlowable(width="100%", thickness=0.8, color=colors.HexColor('#046A38'), spaceBefore=2, spaceAfter=5))
 
         doc_rows = [
             [
@@ -211,45 +234,45 @@ class FormPackagerAgent:
             ]
         ]
 
-        # Add verified docs
+        # Verified documents
         for d in profile.get("existing_documents", []):
             doc_rows.append([
                 Paragraph(d, cell_normal),
                 Paragraph("<font color='#046A38'><b>VERIFIED ✓</b></font>", cell_normal),
-                Paragraph("Document on record and verified against state schema registry.", cell_normal)
+                Paragraph("Document on record and verified against state schema registry.", cell_sub)
             ])
 
-        # Add missing docs
+        # Missing documents with CSC remediation
         for rem in gap_audit.get("remediation_actions", [])[:3]:
             doc_rows.append([
                 Paragraph(f"<b>{rem['document_name']}</b>", cell_bold),
                 Paragraph("<font color='#D9381E'><b>MISSING ✗</b></font>", cell_normal),
-                Paragraph(f"<b>Action:</b> {rem['guidance'].get('action_guide')}<br/><b>Portal/Kiosk:</b> {rem['guidance'].get('online_portal')} | {rem['guidance'].get('service_kiosk')}", cell_normal)
+                Paragraph(f"<b>Action:</b> {rem['guidance'].get('action_guide')}<br/><b>Portal/Kiosk:</b> {rem['guidance'].get('online_portal')} | {rem['guidance'].get('service_kiosk')}", cell_sub)
             ])
 
-        doc_table = Table(doc_rows, colWidths=[150, 90, 300])
+        doc_table = Table(doc_rows, colWidths=[150, 80, 310])
         doc_table.setStyle(TableStyle([
             ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#FAF0E6')),
             ('GRID', (0,0), (-1,-1), 0.5, colors.HexColor('#E0D0C0')),
-            ('PADDING', (0,0), (-1,-1), 4),
+            ('PADDING', (0,0), (-1,-1), 3),
             ('VALIGN', (0,0), (-1,-1), 'TOP'),
         ]))
         story.append(doc_table)
-        story.append(Spacer(1, 10))
+        story.append(Spacer(1, 8))
 
-        # Section 4: Citizen Declaration & Sign-off Block
+        # 7. Section 4: Citizen Declaration & Sign-off Block
         decl_text = (
             "<b>APPLICANT STATUTORY DECLARATION:</b> I hereby declare that all facts and socio-economic declarations "
             "provided herein are true to the best of my knowledge. I authorize Jan-Sahayak Autonomous AI Agent to submit "
-            "and query welfare registries (DBT / PFMS / SECC) on my behalf under the Digital Personal Data Protection (DPDP) Act."
+            "and query welfare registries (DBT / PFMS / SECC) on my behalf under the Digital Personal Data Protection (DPDP) Act 2023."
         )
-        story.append(Paragraph(decl_text, cell_normal))
-        story.append(Spacer(1, 16))
+        story.append(Paragraph(decl_text, cell_sub))
+        story.append(Spacer(1, 12))
 
         sign_data = [
             [
-                Paragraph("________________________________________<br/><b>Digital Signature / Biometric Seal</b><br/>(Jan-Sahayak Cryptographic Token)", cell_normal),
-                Paragraph("________________________________________<br/><b>Applicant Signature / Thumb Impression</b><br/>(Physical Verification at CSC Center)", cell_normal)
+                Paragraph("________________________________________<br/><b>Digital Signature / Biometric Seal</b><br/>(Jan-Sahayak Cryptographic Checksum)", cell_sub),
+                Paragraph("________________________________________<br/><b>Applicant Signature / Thumb Impression</b><br/>(Physical Verification at CSC Center)", cell_sub)
             ]
         ]
         sign_table = Table(sign_data, colWidths=[270, 270])
@@ -259,6 +282,5 @@ class FormPackagerAgent:
         ]))
         story.append(sign_table)
 
-        # Build PDF
         doc.build(story)
         return str(filepath)

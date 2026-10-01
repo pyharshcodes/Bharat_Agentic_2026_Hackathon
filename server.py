@@ -115,6 +115,49 @@ def generate_grievance(payload: Dict[str, Any] = Body(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/speech")
+def synthesize_speech(payload: Dict[str, Any] = Body(...)):
+    """
+    Synthesizes natural audio using gTTS (Hindi or English) and returns the audio stream or URL.
+    """
+    try:
+        from gtts import gTTS
+        import hashlib
+        
+        text = payload.get("text", "नमस्ते! जन-सहायक में आपका स्वागत है।")
+        lang = "hi" if payload.get("lang") == "Hindi" or "hi" in payload.get("lang", "").lower() else "en"
+        
+        # Clean text of markdown asterisks and emojis for speech
+        clean_text = "".join(ch for ch in text if ch.isalnum() or ch in " ,।?!\n").strip()
+        if len(clean_text) > 300:
+            clean_text = clean_text[:300] + "..."
+            
+        text_hash = hashlib.md5(f"{clean_text}_{lang}".encode()).hexdigest()[:8]
+        audio_filename = f"speech_{text_hash}_{lang}.mp3"
+        audio_path = OUTPUT_DIR / audio_filename
+        
+        if not audio_path.exists():
+            tts = gTTS(text=clean_text, lang=lang, slow=False)
+            tts.save(str(audio_path))
+            
+        return {
+            "status": "SUCCESS",
+            "audio_url": f"/api/audio/{audio_filename}",
+            "filename": audio_filename
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Speech synthesis error: {str(e)}")
+
+
+@app.get("/api/audio/{filename}")
+def serve_audio(filename: str):
+    safe_name = Path(filename).name
+    path = OUTPUT_DIR / safe_name
+    if not path.exists():
+        raise HTTPException(status_code=404, detail="Audio file not found")
+    return FileResponse(path=str(path), media_type="audio/mpeg")
+
+
 @app.get("/api/download/{filename}")
 def download_pdf(filename: str):
     """

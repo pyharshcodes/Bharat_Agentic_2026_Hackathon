@@ -55,8 +55,38 @@ DEMO_PERSONAS = {
         "specific_need": "Working capital loan for fruit cart and free private school admission for daughter under RTE",
         "grievance_case": None
     },
+    "kavita_widow": {
+        "name": "Kavita Bai",
+        "age": 62,
+        "gender": "Female",
+        "state": "Madhya Pradesh",
+        "district": "Jabalpur",
+        "urban_rural": "Rural",
+        "occupation": "Unorganized Agricultural Laborer",
+        "annual_income": 45000,
+        "caste": "SC",
+        "landholding_acres": 0.0,
+        "marital_status": "Widow",
+        "daughters_count": 0,
+        "daughter_ages": [],
+        "housing_status": "Kutcha mud house (damaged roof)",
+        "existing_documents": [
+            "Aadhaar Card",
+            "Husband's Death Certificate",
+            "BPL Ration Card",
+            "Post Office Savings Passbook"
+        ],
+        "specific_need": "Widow monthly pension, pucca housing grant, and free medical insurance card",
+        "grievance_case": {
+            "type": "Pension Approval Delayed",
+            "portal": "Samagra / NSAP Jabalpur",
+            "application_no": "MP-NSAP-2024-88912",
+            "days_pending": 114,
+            "grievance_detail": "Submitted widow pension file 4 months ago at Tehsil office, no DBT received, officer asking for redundant affidavit."
+        }
+    },
     "kamala_widow": {
-        "name": "Kamala Bai",
+        "name": "Kavita Bai",
         "age": 62,
         "gender": "Female",
         "state": "Madhya Pradesh",

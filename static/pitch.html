@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jan-Sahayak AI — Pitch Deck (BharatAgentic 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Rozha+One&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #002B49;
+      --navy-dark: #001729;
+      --saffron: #FF671F;
+      --green: #046A38;
+      --bg: #07101E;
+      --card-bg: #0E1B2E;
+      --border: #1E2D44;
+      --text: #F8FAFC;
+      --text-muted: #94A3B8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .tricolor-strip {
+      height: 4px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: linear-gradient(90deg, #FF671F 0%, #FFFFFF 50%, #046A38 100%);
+      z-index: 100;
+    }
+    .slide-container {
+      width: 100%;
+      max-width: 980px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      padding: 40px;
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+    .slide-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    .slide-badge {
+      background: rgba(255, 103, 31, 0.15);
+      color: var(--saffron);
+      border: 1px solid rgba(255, 103, 31, 0.3);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .slide-counter {
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .slide-content {
+      flex: 1;
+    }
+    .slide-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--saffron);
+      margin-bottom: 24px;
+      font-weight: 600;
+    }
+    .slide-body {
+      font-size: 15px;
+      color: #CBD5E1;
+      line-height: 1.6;
+    }
+    .slide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .grid-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      padding: 16px;
+      border-radius: 12px;
+    }
+    .grid-box h4 {
+      color: var(--saffron);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 30px;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .nav-btn {
+      background: #1E2D44;
+      color: #FFFFFF;
+      border: 1px solid var(--border);
+      padding: 8px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background: var(--saffron);
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .back-home {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .back-home:hover {
+      color: var(--saffron);
+    }
+  </style>
+</head>
+<body>
+  <div class="tricolor-strip"></div>
+
+  <div class="slide-container">
+    <div class="slide-header">
+      <span class="slide-badge">BharatAgentic 2026 • aiKart Pitch Deck</span>
+      <span class="slide-counter" id="slideCounter">Slide 1 of 10</span>
+    </div>
+
+    <div class="slide-content" id="slideContent">
+      <!-- Injected via JavaScript -->
+    </div>
+
+    <div class="slide-footer">
+      <a href="/" class="back-home">← Back to Interactive Dashboard</a>
+      <div style="display: flex; gap: 10px;">
+        <button class="nav-btn" id="prevBtn" disabled>◀ Previous</button>
+        <button class="nav-btn" id="nextBtn">Next ▶</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const slides = [
+      {
+        badge: "Title Slide",
+        title: "Jan-Sahayak AI (जन-सहायक)",
+        subtitle: "Autonomous Civic & Welfare Delivery Agent for Bharat",
+        body: `
+          <p style="font-size:18px; margin-bottom:20px;">Transforming 800M+ citizens from passive welfare searchers into verified, entitled beneficiaries through an autonomous multi-agent cognitive swarm.</p>
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>🎯 Problem Track</h4>
+              <p>Citizen & GovTech / Bharat Languages</p>
+            </div>
+            <div class="grid-box">
+              <h4>⚡ Speed & Latency</h4>
+              <p>Under 100ms Deterministic Execution</p>
+            </div>
+            <div class="grid-box">
+              <h4>🏆 Platform Native</h4>
+              <p>aiKart "Try Me Now" Sandbox Compliant</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "The Ground Reality",
+        title: "The ₹4,00,000 Crore Welfare Bottleneck",
+        subtitle: "India allocates massive welfare budgets, yet 70% miss out",
+        body: `
+          <p>Every year, the Government of India and State Governments announce 800+ life-changing welfare schemes. Yet citizens in rural and semi-urban Bharat struggle with:</p>
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>1. Bureaucratic Fragmentation</h4>
+              <p>Rules, forms, and portals scattered across 28 states and dozens of ministries.</p>
+            </div>
+            <div class="grid-box">
+              <h4>2. The Single-Document Trap</h4>
+              <p>Missing a single certificate (Khatauni, Niwas Praman Patra) causes outright rejection.</p>
+            </div>
+            <div class="grid-box">
+              <h4>3. Bureaucratic Delays</h4>
+              <p>Benefits and pensions stuck for months with zero accountability or recourse.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Why Chatbots Fail",
+        title: "Chatbots Chat. Autonomous Agents ACT.",
+        subtitle: "Moving beyond passive LLM wrappers",
+        body: `
+          <div class="slide-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="grid-box" style="border-color:#DC2626;">
+              <h4 style="color:#DC2626;">❌ Traditional Gov Chatbot</h4>
+              <ul style="margin-left:20px; font-size:14px; line-height:1.8;">
+                <li>Copies generic FAQ text from websites</li>
+                <li>Cannot check real eligibility or numbers</li>
+                <li>Cannot inspect missing certificates</li>
+                <li>Produces no application forms or legal files</li>
+                <li>Crashes in isolated sandboxes without external APIs</li>
+              </ul>
+            </div>
+            <div class="grid-box" style="border-color:#046A38;">
+              <h4 style="color:#22C55E;">✅ Jan-Sahayak Autonomous Agent</h4>
+              <ul style="margin-left:20px; font-size:14px; line-height:1.8;">
+                <li>Deterministic 50+ scheme rule reasoning</li>
+                <li>Calculates exact Document Readiness Score %</li>
+                <li>Provides CSC / e-District remediation roadmaps</li>
+                <li>Mints official application dossier PDFs with barcodes</li>
+                <li>Drafts statutory CPGRAMS appeals under Citizen Charter</li>
+              </ul>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "System Architecture",
+        title: "Multi-Agent Cognitive Swarm",
+        subtitle: "5 Specialized Sub-Agents working in choreographed harmony",
+        body: `
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>1. Profile Intelligence</h4>
+              <p>Extracts demographic, income, land, and family parameters from vernacular input.</p>
+            </div>
+            <div class="grid-box">
+              <h4>2. Schemes Reasoning</h4>
+              <p>Deterministic evaluation across PM-Kisan, Ayushman Bharat, PMAY, SVANidhi, etc.</p>
+            </div>
+            <div class="grid-box">
+              <h4>3. Gap Verifier</h4>
+              <p>Cross-references required docs and calculates readiness score.</p>
+            </div>
+            <div class="grid-box">
+              <h4>4. Form Packager</h4>
+              <p>Mints official government application PDF with QR codes and declarations.</p>
+            </div>
+            <div class="grid-box">
+              <h4>5. Grievance Drafter</h4>
+              <p>Drafts statutory CPGRAMS administrative appeals citing Citizen Charter SLAs.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Tangible Artifact #1",
+        title: "Official Unified Application Dossier (PDF)",
+        subtitle: "Real print-ready government deliverables generated instantly",
+        body: `
+          <p>Unlike conversational assistants that stop at text, Jan-Sahayak compiles and mints an official, cryptographically verified application dossier:</p>
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>🏛️ National Header</h4>
+              <p>Government of Bharat emblem and tricolor security banner.</p>
+            </div>
+            <div class="grid-box">
+              <h4>📱 QR Code Verification</h4>
+              <p>Dynamic QR verification pointing to citizen reference checksums.</p>
+            </div>
+            <div class="grid-box">
+              <h4>📜 DPDP Statutory Declaration</h4>
+              <p>Full applicant declaration and biometric CSC signature block.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Tangible Artifact #2",
+        title: "Autonomous CPGRAMS Legal Appeals",
+        subtitle: "Empowering citizens with statutory rights against bureaucratic lethargy",
+        body: `
+          <p>When an elderly widow or farmer reports delayed DBT or stuck pensions, the Grievance Agent automatically drafts a legally structured administrative petition:</p>
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>⚖️ Citizen Charter Citations</h4>
+              <p>Direct citation of Section 19 and statutory 30-day resolution SLAs.</p>
+            </div>
+            <div class="grid-box">
+              <h4>🏛️ Competent Authority Routing</h4>
+              <p>Addressed specifically to District Magistrate & Nodal Officers.</p>
+            </div>
+            <div class="grid-box">
+              <h4>↗️ Direct Escalation</h4>
+              <p>One-click submission links to national CPGRAMS portal and CM Helpline 1076.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Platform Integration",
+        title: "aiKart Manifest & Docker Sandbox Native",
+        subtitle: "100% compliant with aiKart v1 specification",
+        body: `
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>📦 aikart-manifest.yaml</h4>
+              <p>Matches exact specification from aiKart Agent Manifest Guide (v1).</p>
+            </div>
+            <div class="grid-box">
+              <h4>🔒 Zero-Egress Resilience</h4>
+              <p>Runs cleanly under <code>networkEgress: none</code> in under 100ms.</p>
+            </div>
+            <div class="grid-box">
+              <h4>🔄 Dual Mode Submission</h4>
+              <p>Method 1: Docker Sandbox runner + Method 2: Hosted FastAPI REST API.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "1-Click Personas",
+        title: "Real Indian Personas Tested Live",
+        subtitle: "Immediate end-to-end proof for judges",
+        body: `
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>🌾 Ramesh (Farmer - UP)</h4>
+              <p>Unlocks 6 schemes (PM-Kisan, Ayushman, PMAY-G) with ₹1,41,000 direct benefit.</p>
+            </div>
+            <div class="grid-box">
+              <h4>🛒 Sunita (Vendor - Delhi)</h4>
+              <p>PM SVANidhi collateral-free credit + 25% RTE Free Private School Admission.</p>
+            </div>
+            <div class="grid-box">
+              <h4>👵 Kavita (Widow - MP)</h4>
+              <p>114 days pending pension → Triggers statutory CPGRAMS administrative appeal.</p>
+            </div>
+            <div class="grid-box">
+              <h4>🪵 Rafiq (Artisan - UP)</h4>
+              <p>PM Vishwakarma ₹15,000 tool kit grant + 5% low-interest business credit.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Measurable Impact",
+        title: "Quantified Impact for Bharat",
+        subtitle: "Real socio-economic value delivered to grassroots",
+        body: `
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4 style="font-size:24px; color:#22C55E;">₹50K - ₹1.5L</h4>
+              <p>Average direct unclaimed entitlement unlocked per underprivileged family.</p>
+            </div>
+            <div class="grid-box">
+              <h4 style="font-size:24px; color:#38BDF8;">&lt; 100ms</h4>
+              <p>End-to-end execution latency across 5 specialized sub-agents.</p>
+            </div>
+            <div class="grid-box">
+              <h4 style="font-size:24px; color:#FF671F;">400,000+</h4>
+              <p>Common Service Centres (CSCs) ready for instant low-compute deployment.</p>
+            </div>
+          </div>
+        `
+      },
+      {
+        badge: "Why We Win",
+        title: "Why Jan-Sahayak Deserves Rank 1",
+        subtitle: "Complete excellence across problem, design, and execution",
+        body: `
+          <p style="font-size:17px; margin-bottom:20px;">Jan-Sahayak AI isn't just an idea or a slide deck—it is a production-grade, containerized, battle-tested agent built specifically for the soul of Bharat.</p>
+          <div class="slide-grid">
+            <div class="grid-box">
+              <h4>1. Genuine Bharat Impact</h4>
+              <p>Solves the #1 welfare delivery problem touching 800 million citizens.</p>
+            </div>
+            <div class="grid-box">
+              <h4>2. Multi-Agent Depth</h4>
+              <p>5 coordinated agents with explainable reasoning and zero hallucinations.</p>
+            </div>
+            <div class="grid-box">
+              <h4>3. Production Polish</h4>
+              <p>Working PDF dossiers, CPGRAMS appeals, speech synthesis, and live telemetry.</p>
+            </div>
+          </div>
+        `
+      }
+    ];
+
+    let currentSlide = 0;
+
+    function renderSlide(index) {
+      const s = slides[index];
+      document.getElementById("slideCounter").innerText = `Slide ${index + 1} of ${slides.length}`;
+      document.getElementById("slideContent").innerHTML = `
+        <div class="slide-title">${s.title}</div>
+        <div class="slide-subtitle">${s.subtitle}</div>
+        <div class="slide-body">${s.body}</div>
+      `;
+      document.getElementById("prevBtn").disabled = index === 0;
+      document.getElementById("nextBtn").disabled = index === slides.length - 1;
+    }
+
+    document.getElementById("prevBtn").addEventListener("click", () => {
+      if (currentSlide > 0) {
+        currentSlide--;
+        renderSlide(currentSlide);
+      }
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      if (currentSlide < slides.length - 1) {
+        currentSlide++;
+        renderSlide(currentSlide);
+      }
+    });
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === " ") {
+        if (currentSlide < slides.length - 1) {
+          currentSlide++;
+          renderSlide(currentSlide);
+        }
+      } else if (e.key === "ArrowLeft") {
+        if (currentSlide > 0) {
+          currentSlide--;
+          renderSlide(currentSlide);
+        }
+      }
+    });
+
+    renderSlide(currentSlide);
+  </script>
+</body>
+</html>
